@@ -100,7 +100,7 @@
 <body>
 
     <div id="app-container">
-        <video id="webcam" autoplay playsinline></video>
+        <video id="webcam" autoplay muted playsinline></video>
         <canvas id="three_canvas"></canvas>
         <canvas id="hidden_composite_canvas"></canvas>
 
@@ -216,8 +216,15 @@
 
         async function startCamera() {
             const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+            video.muted = true;
             video.srcObject = stream;
-            video.addEventListener("loadeddata", () => {
+            video.style.visibility = 'visible';
+            video.addEventListener("loadeddata", async () => {
+                try {
+                    await video.play();
+                } catch (playError) {
+                    console.warn('Video play failed:', playError);
+                }
                 status.innerText = "Sistem Hazır";
                 predictWebcam();
                 // Varsayılan modeli yükle (Şapka)
