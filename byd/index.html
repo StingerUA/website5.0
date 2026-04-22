@@ -1,9 +1,11 @@
- <!DOCTYPE html>
-<html lang="ru">
+   
+
+   <!DOCTYPE html>
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebAR: Albaspace Fix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WebAR: Albaspace Sanal Deneme</title>
     
     <script type="importmap">
     {
@@ -14,17 +16,43 @@
     }
     </script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
-        body { margin: 0; overflow: hidden; background: #000; font-family: sans-serif; color: white; }
-        #app-container { position: relative; width: 100vw; height: 100vh; }
-        video, canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+        body { margin: 0; overflow: hidden; background: #000; font-family: 'Segoe UI', sans-serif; color: white; -webkit-tap-highlight-color: transparent; }
+        
+        /* Ana Konteyner */
+        #app-container { position: relative; width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+
+        /* Kamera Videosu ve 3D Tuvali üst üste */
+        video, #three_canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
         video { z-index: 1; }
         #three_canvas { z-index: 2; pointer-events: none; }
-        .ui-overlay { position: absolute; bottom: 30px; left: 0; right: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; gap: 15px; }
-        .status-badge { background: rgba(0, 0, 0, 0.7); padding: 8px 15px; border-radius: 20px; font-size: 14px; }
+
+        /* Arayüz Öğeleri Konteyneri */
+        .ui-container { position: relative; z-index: 100; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 20px; padding-bottom: 30px; }
+
+        /* Durum Rozeti */
+        .status-badge { background: rgba(0, 0, 0, 0.7); padding: 8px 15px; border-radius: 20px; font-size: 14px; border: 1px solid rgba(255,255,255,0.2); }
+
+        /* Ana Kayıt Düğmesi */
+        .record-button { width: 80px; height: 80px; border-radius: 50%; border: 5px solid white; background: transparent; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: all 0.2s ease; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .record-button i { font-size: 35px; color: white; }
+        .record-button:active { transform: scale(0.9); background: rgba(255, 255, 255, 0.2); }
+
+        /* Model Seçim Düğmeleri */
         .controls { display: flex; gap: 10px; background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 15px; backdrop-filter: blur(10px); }
-        button { padding: 12px 18px; border: none; background: rgba(255,255,255,0.2); color: white; border-radius: 10px; cursor: pointer; font-weight: bold; }
-        button.active { background: #3498db; }
+        
+        button { padding: 12px 18px; border: none; background: rgba(255,255,255,0.2); color: white; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; font-weight: bold; font-size: 14px; }
+        button:hover { background: rgba(255,255,255,0.4); }
+        button.active { background: #3498db; box-shadow: 0 0 15px rgba(52, 152, 219, 0.5); }
+
+        /* Çekilen Fotoğraf Önizleme Ekranı (İlk başta gizli) */
+        #photo-preview { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 200; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+        #photo-preview img { max-width: 100%; max-height: 80%; border-radius: 10px; box-shadow: 0 0 30px rgba(255,255,255,0.2); margin-bottom: 20px; }
+        .preview-controls { display: flex; gap: 20px; }
+        
+        #hidden_composite_canvas { display: none; }
     </style>
 </head>
 <body>
@@ -32,37 +60,114 @@
     <div id="app-container">
         <video id="webcam" autoplay playsinline></video>
         <canvas id="three_canvas"></canvas>
+        <canvas id="hidden_composite_canvas"></canvas> <div class="ui-container">
+            <div class="status-badge" id="status">Sistem başlatılıyor...</div>
+            
+            <button class="record-button" id="photo_button" onclick="capturePhoto()" title="Fotoğraf Çek">
+                <i class="fas fa-camera"></i>
+            </button>
 
-        <div class="ui-overlay">
-            <div class="status-badge" id="status">Загрузка...</div>
             <div class="controls">
-                <button onclick="switchModel('glasses1')" id="btn-glasses1">Очки 1</button>
-                <button onclick="switchModel('glasses2')" id="btn-glasses2">Очки 2</button>
-                <button onclick="switchModel('cap1')" id="btn-cap1">Кепка</button>
-                <button onclick="switchModel('none')">Сброс</button>
+                <button onclick="switchModel('cap1')" id="btn-cap1">Şapka</button>
+                <button onclick="switchModel('glasses1')" id="btn-glasses1">Gözlük 1</button>
+                <button onclick="switchModel('glasses2')" id="btn-glasses2">Gözlük 2</button>
+                <button onclick="switchModel('none')" style="background: rgba(231, 76, 60, 0.4);">Sıfırla</button>
+            </div>
+        </div>
+
+        <div id="photo-preview">
+            <img id="preview-image" src="" alt="Önizleme">
+            <div class="preview-controls">
+                <button onclick="closePreview()" style="background: rgba(231, 76, 60, 0.6);">İptal Et</button>
+                <button id="download_link" style="background: #2ecc71; text-decoration: none;">Cihaza Kaydet</button>
             </div>
         </div>
     </div>
 
     <script type="module">
-        // Теперь импорты будут работать корректно благодаря Import Map
         import * as THREE from 'three';
         import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
         import { FaceLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js";
 
+        // --- 1. MODEL AYARLARI ---
+        // Sizin talebiniz üzerine boyutlar (scale) 8 kat artırıldı.
+        // Orijinal: 0.15 -> Yeni: 1.2
+        // Orijinal: 0.16 -> Yeni: 1.28
+        // Orijinal: 0.35 -> Yeni: 2.8
         const MODELS_CONFIG = {
-            glasses1: { type: 'glasses', url: 'glasses1.glb', scale: 0.15, yOffset: 0 },
-            glasses2: { type: 'glasses', url: 'glasses2.glb', scale: 0.16, yOffset: 0 },
-            cap1:     { type: 'cap',     url: 'cap1.glb',     scale: 0.35, yOffset: 0.18 }
+            cap1:     { type: 'cap',     url: 'cap1.glb',     scale: 2.8,  yOffset: 0.18 }, // Şapka artık ilk sırada
+            glasses1: { type: 'glasses', url: 'glasses1.glb', scale: 1.2,  yOffset: 0 },
+            glasses2: { type: 'glasses', url: 'glasses2.glb', scale: 1.28, yOffset: 0 }
         };
 
         const video = document.getElementById("webcam");
         const status = document.getElementById("status");
-        let faceLandmarker, scene, camera, renderer, gltfLoader;
+        
+        let faceLandmarker;
+        let scene, camera, renderer, gltfLoader;
         let currentModel = null;
-        let activeKey = 'none';
+        let activeKey = 'cap1'; // Varsayılan olarak şapka seçili
         let lastVideoTime = -1;
 
+        // --- 2. THREE.JS BAŞLATMA ---
+        function initThreeJS() {
+            scene = new THREE.Scene();
+
+            const aspect = window.innerWidth / window.innerHeight;
+            camera = new THREE.OrthographicCamera(-aspect, aspect, 1, -1, 0.1, 1000);
+            camera.position.z = 10;
+
+            renderer = new THREE.WebGLRenderer({
+                canvas: document.getElementById('three_canvas'),
+                alpha: true,
+                antialias: true,
+                preserveDrawingBuffer: true // Fotoğraf çekimi için gerekli
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            const ambient = new THREE.AmbientLight(0xffffff, 2.0);
+            scene.add(ambient);
+            const directional = new THREE.DirectionalLight(0xffffff, 2.0);
+            directional.position.set(0, 1, 2);
+            scene.add(directional);
+
+            gltfLoader = new GLTFLoader();
+        }
+
+        // --- 3. MODEL DEĞİŞTİRME FONKSİYONU ---
+        window.switchModel = async (key) => {
+            if (currentModel) {
+                scene.remove(currentModel);
+                currentModel = null;
+            }
+
+            // Düğme durumlarını temizle
+            document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+            if(key === 'none') {
+                activeKey = 'none';
+                status.innerText = "İzleme Modu";
+                return;
+            }
+
+            const config = MODELS_CONFIG[key];
+            const btn = document.getElementById(`btn-${key}`);
+            if(btn) btn.classList.add('active');
+
+            status.innerText = "3D Yükleniyor...";
+            
+            gltfLoader.load(config.url, (gltf) => {
+                currentModel = gltf.scene;
+                scene.add(currentModel);
+                activeKey = key;
+                status.innerText = "Deneme Aktif";
+            }, undefined, (err) => {
+                console.error(err);
+                status.innerText = ".glb Yükleme Hatası";
+            });
+        };
+
+        // --- 4. MEDIAPIPE AR BAŞLATMA ---
         async function initAR() {
             try {
                 const filesetResolver = await FilesetResolver.forVisionTasks(
@@ -78,69 +183,47 @@
                 });
                 
                 initThreeJS();
-                startCamera();
+                await startCamera();
             } catch (e) {
-                status.innerText = "Ошибка инициализации";
+                status.innerText = "Hata oluştu";
                 console.error(e);
             }
         }
 
-        function initThreeJS() {
-            scene = new THREE.Scene();
-            const aspect = window.innerWidth / window.innerHeight;
-            camera = new THREE.OrthographicCamera(-aspect, aspect, 1, -1, 0.1, 1000);
-            camera.position.z = 10;
-
-            renderer = new THREE.WebGLRenderer({
-                canvas: document.getElementById('three_canvas'),
-                alpha: true,
-                antialias: true
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-
-            scene.add(new THREE.AmbientLight(0xffffff, 2.0));
-            const dl = new THREE.DirectionalLight(0xffffff, 2.0);
-            dl.position.set(0, 1, 2);
-            scene.add(dl);
-
-            gltfLoader = new GLTFLoader();
-        }
-
-        window.switchModel = (key) => {
-            if (currentModel) scene.remove(currentModel);
-            document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            if(key === 'none') { activeKey = 'none'; return; }
-
-            const config = MODELS_CONFIG[key];
-            document.getElementById(`btn-${key}`)?.classList.add('active');
-            
-            gltfLoader.load(config.url, (gltf) => {
-                currentModel = gltf.scene;
-                scene.add(currentModel);
-                activeKey = key;
-                status.innerText = "Модель загружена";
-            });
-        };
-
         async function startCamera() {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
-            video.srcObject = stream;
-            video.addEventListener("loadeddata", () => predictWebcam());
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: "user", width: 1280, height: 720 } 
+                });
+                video.srcObject = stream;
+                video.addEventListener("loadeddata", () => {
+                    status.innerText = "Sistem Hazır";
+                    predictWebcam();
+                    // Varsayılan modeli yükle (Şapka)
+                    switchModel('cap1');
+                });
+            } catch (err) {
+                status.innerText = "Kameraya Erişim Reddedildi";
+            }
         }
 
+        // --- 5. ANA DÖNGÜ ---
         function predictWebcam() {
             if (lastVideoTime !== video.currentTime) {
                 lastVideoTime = video.currentTime;
                 const results = faceLandmarker.detectForVideo(video, performance.now());
+
                 if (results.faceLandmarks && results.faceLandmarks[0] && currentModel) {
                     updateTransform(results.faceLandmarks[0]);
+                } else if (currentModel) {
+                    currentModel.visible = false;
                 }
             }
             renderer.render(scene, camera);
             requestAnimationFrame(predictWebcam);
         }
 
+        // --- 6. MODEL YERLEŞTİRME MANTIĞI ---
         function updateTransform(landmarks) {
             currentModel.visible = true;
             const config = MODELS_CONFIG[activeKey];
@@ -152,13 +235,13 @@
                 z: -landmarks[idx].z * 10
             });
 
-            const bridge = getPos(168);
-            const forehead = getPos(10);
-            const left = getPos(234);
-            const right = getPos(454);
+            const bridge = getPos(168); // Göz arası
+            const forehead = getPos(10); // Alın
+            const leftTemple = getPos(234);
+            const rightTemple = getPos(454);
 
-            const faceWidth = Math.sqrt(Math.pow(right.x - left.x, 2) + Math.pow(right.y - left.y, 2));
-            const angle = Math.atan2(right.y - left.y, right.x - left.x);
+            const faceWidth = Math.sqrt(Math.pow(rightTemple.x - leftTemple.x, 2) + Math.pow(rightTemple.y - leftTemple.y, 2));
+            const angle = Math.atan2(rightTemple.y - leftTemple.y, rightTemple.x - leftTemple.x);
 
             if (config.type === 'glasses') {
                 currentModel.position.set(bridge.x, bridge.y, bridge.z);
@@ -170,6 +253,63 @@
             const s = faceWidth * config.scale * 10;
             currentModel.scale.set(s, s, s);
         }
+
+        // --- 7. FOTOĞRAF ÇEKME VE GALERİYE KAYDETME ---
+        window.capturePhoto = () => {
+            const compositeCanvas = document.getElementById('hidden_composite_canvas');
+            const compositeCtx = compositeCanvas.getContext('2d');
+            const threeCanvas = document.getElementById('three_canvas');
+
+            // Çözünürlüğü video veya ekran boyutuna ayarla
+            const width = video.videoWidth || window.innerWidth;
+            const height = video.videoHeight || window.innerHeight;
+            compositeCanvas.width = width;
+            compositeCanvas.height = height;
+
+            // Arka plana video karesini çiz (Aynalanmış)
+            compositeCtx.translate(width, 0);
+            compositeCtx.scale(-1, 1);
+            compositeCtx.drawImage(video, 0, 0, width, height);
+            
+            // Aynalamayı sıfırla
+            compositeCtx.setTransform(1, 0, 0, 1, 0, 0);
+
+            // 3D Model tuvalini üzerine çiz (Aynalanmış şekilde çizildiği için tekrar aynalama yapmaya gerek yok)
+            compositeCtx.drawImage(threeCanvas, 0, 0, width, height);
+
+            // Görüntüyü Data URL'ye çevir (Base64)
+            const imageDataUrl = compositeCanvas.toDataURL('image/png');
+
+            // Önizleme ekranını göster
+            const previewImage = document.getElementById('preview-image');
+            previewImage.src = imageDataUrl;
+            document.getElementById('photo-preview').style.display = 'flex';
+
+            // İndirme bağlantısını hazırla
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            const fileName = `Albaspace-WebAR-${timestamp}.png`;
+            const downloadLink = document.getElementById('download_link');
+            
+            // "Cihaza Kaydet" düğmesini indirme bağlantısı olarak ayarla
+            downloadLink.onclick = () => {
+                const link = document.createElement('a');
+                link.href = imageDataUrl;
+                link.download = fileName;
+                link.click();
+            };
+        };
+
+        window.closePreview = () => {
+            document.getElementById('photo-preview').style.display = 'none';
+        };
+
+        // Yeniden boyutlandırma
+        window.addEventListener('resize', () => {
+            const aspect = window.innerWidth / window.innerHeight;
+            camera.left = -aspect; camera.right = aspect;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
 
         initAR();
     </script>
