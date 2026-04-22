@@ -61,3 +61,8 @@ html.service-page-dark .site-header img,
 html.service-page-dark footer img {
   filter: none !important;
 }
+
+/* Make button text white on service pages */
+html.service-page-dark .btn-primary {
+  color: #ffffff !important;
+}

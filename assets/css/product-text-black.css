@@ -74,6 +74,11 @@ html.product-text-black footer img {
   filter: none !important;
 }
 
+/* Make cart icon visible on white header - invert blue icon to black */
+html.product-text-black .header-cart-icon img {
+  filter: invert(100%) !important;
+}
+
 /* Force dark background on header/footer children too */
 html.product-text-black header *,
 html.product-text-black .site-header *,
