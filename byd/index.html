@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WebAR: Albaspace Gelişmiş Deneme Fix</title>
+    <title>WebAR: Albaspace Gelişmiş Deneme</title>
     
     <script type="importmap">
     {
@@ -47,7 +47,7 @@
         <div class="ui-container">
             <div class="status-badge" id="status">Sistem başlatılıyor...</div>
             
-            <button class="record-button" id="photo_button" onclick="capturePhoto()" title="Fotoğraf Çek">
+            <button class="record-button" id="photo_button" onclick="capturePhoto()">
                 <i class="fas fa-camera"></i>
             </button>
 
@@ -62,10 +62,8 @@
         <div id="photo-preview">
             <img id="preview-image" src="" alt="Önizleme">
             <div class="preview-controls">
-                <button onclick="closePreview()" style="background: rgba(231, 76, 60, 0.6);">İptal Et</button>
-                <button id="download_link" style="background: #2ecc71;">
-                    <i class="fas fa-download" style="margin-right: 8px;"></i> Cihaza Kaydet
-                </button>
+                <button onclick="closePreview()" style="background: rgba(231, 76, 60, 0.6);">İptal</button>
+                <button id="download_link" style="background: #2ecc71;">Kaydet</button>
             </div>
         </div>
     </div>
@@ -75,11 +73,11 @@
         import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
         import { FaceLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js";
 
-        // --- 1. MODEL AYARLARI (GÜНДӨНДҮ) ---
+        // --- 1. MODEL AYARLARI ---
         const MODELS_CONFIG = {
-            cap1:     { type: 'cap',     url: 'cap1.glb',     scale: 1.4,  yOffset: 0.18 }, // Boyut / 2
-            glasses1: { type: 'glasses', url: 'glasses1.glb', scale: 2.4,  yOffset: 0 },    // Boyut * 2
-            glasses2: { type: 'glasses', url: 'glasses2.glb', scale: 2.56, yOffset: 0 }     // Boyut * 2
+            cap1:     { type: 'cap',     url: 'cap1.glb',     scale: 1.4,  yOffset: 0.18 }, 
+            glasses1: { type: 'glasses', url: 'glasses1.glb', scale: 2.4,  yOffset: 0 },    
+            glasses2: { type: 'glasses', url: 'glasses2.glb', scale: 2.56, yOffset: 0 }     
         };
 
         const video = document.getElementById("webcam");
@@ -171,30 +169,26 @@
                 z: -landmarks[idx].z * 10
             });
 
-            const bridge = getPos(168); // Göz arası
-            const forehead = getPos(10); // Alın
+            const bridge = getPos(168);
+            const forehead = getPos(10);
             const left = getPos(234);
             const right = getPos(454);
 
             const faceWidth = Math.sqrt(Math.pow(right.x - left.x, 2) + Math.pow(right.y - left.y, 2));
             const angle = Math.atan2(right.y - left.y, right.x - left.x);
 
-            // --- HESAPLAMA: BOYUT VE KONUM (АШАКЫ СҮРҮЛҮҮ) ---
             const s = faceWidth * config.scale * 10;
             currentModel.scale.set(s, s, s);
 
-            // Modelleri kendi boyutlarının %50'si kadar aşağı kaydırıyoruz
-            // Орто-камера координат системасында масштаб коэффициентине негизделген.
-            const downwardShift = s * 0.5; // 0.05'ten 0.5'e yükseltildi (%%50)
+            // --- ОБНОВЛЕНО: Смещение 50% ---
+            const downwardShift = s * 0.5; 
 
-            let finalY;
             if (config.type === 'glasses') {
-                finalY = bridge.y - downwardShift;
+                currentModel.position.set(bridge.x, bridge.y - downwardShift, bridge.z);
             } else {
-                finalY = (forehead.y + config.yOffset) - downwardShift;
+                currentModel.position.set(forehead.x, (forehead.y + config.yOffset) - downwardShift, forehead.z);
             }
 
-            currentModel.position.set(bridge.x, finalY, bridge.z);
             currentModel.rotation.z = angle;
         }
 
@@ -203,40 +197,34 @@
             const compositeCtx = compositeCanvas.getContext('2d');
             const threeCanvas = document.getElementById('three_canvas');
 
-            // Ekran boyutunu al ( viewport )
-            const cW = window.innerWidth;
-            const cH = window.innerHeight;
-            compositeCanvas.width = cW;
-            compositeCanvas.height = cH;
+            // --- ОБНОВЛЕНО: Логика синхронизации кадра (Object-fit: Cover) ---
+            const screenW = window.innerWidth;
+            const screenH = window.innerHeight;
+            compositeCanvas.width = screenW;
+            compositeCanvas.height = screenH;
 
-            const vW = video.videoWidth;
-            const vH = video.videoHeight;
+            const videoW = video.videoWidth;
+            const videoH = video.videoHeight;
 
-            // object-fit: cover'ı taklit etmek için ölçeği hesapla
-            const scale = Math.max(cW / vW, cH / vH);
-            
-            // Video karesinin kullanılacak kısmını hesapla (merkezden)
-            const dW = cW / scale;
-            const dH = cH / scale;
-            const dX = (vW - dW) / 2;
-            const dY = (vH - dH) / 2;
+            const scale = Math.max(screenW / videoW, screenH / videoH);
+            const drawW = videoW * scale;
+            const drawH = videoH * scale;
+            const offsetX = (screenW - drawW) / 2;
+            const offsetY = (screenH - drawH) / 2;
 
-            // 1. Arka plana video karesini cover ve aynalanmış şekilde çiz
+            // 1. Отрисовка видео (зеркально)
             compositeCtx.save();
-            compositeCtx.translate(cW, 0);
+            compositeCtx.translate(screenW, 0);
             compositeCtx.scale(-1, 1);
-            compositeCtx.drawImage(video, dX, dY, dW, dH, 0, 0, cW, cH);
+            compositeCtx.drawImage(video, offsetX, offsetY, drawW, drawH);
             compositeCtx.restore();
 
-            // 2. 3D Model tuvalini üzerine çiz (zaten cover ve aynalanmış)
-            compositeCtx.drawImage(threeCanvas, 0, 0, cW, cH);
+            // 2. Отрисовка моделей поверх
+            compositeCtx.drawImage(threeCanvas, 0, 0, screenW, screenH);
 
-            // Önizleme ekranını göster
             const dataUrl = compositeCanvas.toDataURL('image/png');
             document.getElementById('preview-image').src = dataUrl;
             document.getElementById('photo-preview').style.display = 'flex';
-
-            // İndirme mantığı
             document.getElementById('download_link').onclick = () => {
                 const link = document.createElement('a');
                 link.href = dataUrl;
