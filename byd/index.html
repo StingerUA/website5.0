@@ -40,17 +40,65 @@
         .record-button i { font-size: 35px; color: white; }
         .record-button:active { transform: scale(0.9); background: rgba(255, 255, 255, 0.2); }
 
-        /* Model Seçim Düğmeleri */
-        .controls { display: flex; gap: 10px; background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 15px; backdrop-filter: blur(10px); }
+        /* Model Seçim Düğmeleri - Orta satırda yanyana */
+        .controls { display: flex; gap: 15px; background: rgba(255, 255, 255, 0.1); padding: 10px 15px; border-radius: 15px; backdrop-filter: blur(10px); align-items: center; }
         
-        button { padding: 12px 18px; border: none; background: rgba(255,255,255,0.2); color: white; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; font-weight: bold; font-size: 14px; }
-        button:hover { background: rgba(255,255,255,0.4); }
-        button.active { background: #3498db; box-shadow: 0 0 15px rgba(52, 152, 219, 0.5); }
+        /* Kaysız tuşlar (strelkalar, +/-) */
+        .arrow-btn, .scale-btn { 
+            border: none; 
+            border-radius: 50%; 
+            width: 50px; 
+            height: 50px; 
+            font-size: 24px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
+            cursor: pointer; 
+            background: rgba(52, 152, 219, 0.6);
+            color: white;
+            transition: all 0.2s ease;
+        }
+        
+        .arrow-btn:hover, .scale-btn:hover { background: rgba(52, 152, 219, 0.9); }
+        .arrow-btn:active, .scale-btn:active { transform: scale(0.9); }
+
+        /* Kamera Düğmesi */
+        .camera-btn { 
+            width: 70px; 
+            height: 70px; 
+            border-radius: 50%; 
+            border: 4px solid white; 
+            background-color: rgba(13, 42, 87, 0.85); 
+            cursor: pointer; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+        
+        .camera-btn::after { 
+            content: ''; 
+            width: 55px; 
+            height: 55px; 
+            background-color: white; 
+            border-radius: 50%; 
+            transition: transform 0.1s; 
+        }
+        
+        .camera-btn:active::after { 
+            transform: scale(0.9); 
+            background-color: #ddd; 
+        }
 
         /* Çekilen Fotoğraf Önizleme Ekranı (İlk başta gizli) */
         #photo-preview { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 200; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         #photo-preview img { max-width: 100%; max-height: 80%; border-radius: 10px; box-shadow: 0 0 30px rgba(255,255,255,0.2); margin-bottom: 20px; }
         .preview-controls { display: flex; gap: 20px; }
+        
+        button { padding: 12px 18px; border: none; background: rgba(255,255,255,0.2); color: white; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; font-weight: bold; font-size: 14px; }
+        button:hover { background: rgba(255,255,255,0.4); }
+        button.active { background: #3498db; box-shadow: 0 0 15px rgba(52, 152, 219, 0.5); }
         
         #hidden_composite_canvas { display: none; }
     </style>
@@ -60,18 +108,26 @@
     <div id="app-container">
         <video id="webcam" autoplay playsinline></video>
         <canvas id="three_canvas"></canvas>
-        <canvas id="hidden_composite_canvas"></canvas> <div class="ui-container">
+        <canvas id="hidden_composite_canvas"></canvas>
+        
+        <div class="ui-container">
             <div class="status-badge" id="status">Sistem başlatılıyor...</div>
             
-            <button class="record-button" id="photo_button" onclick="capturePhoto()" title="Fotoğraf Çek">
-                <i class="fas fa-camera"></i>
-            </button>
-
             <div class="controls">
-                <button onclick="switchModel('cap1')" id="btn-cap1">Şapka</button>
-                <button onclick="switchModel('glasses1')" id="btn-glasses1">Gözlük 1</button>
-                <button onclick="switchModel('glasses2')" id="btn-glasses2">Gözlük 2</button>
-                <button onclick="switchModel('none')" style="background: rgba(231, 76, 60, 0.4);">Sıfırla</button>
+                <!-- Kaysı tuş (-) -->
+                <button class="scale-btn" id="scale-down" title="Küçült">−</button>
+                
+                <!-- Sol ok tuşu -->
+                <button class="arrow-btn" id="prev-btn" title="Önceki Model">◀</button>
+                
+                <!-- Kamera tuşu -->
+                <div class="camera-btn" id="photo_button" title="Fotoğraf Çek"></div>
+                
+                <!-- Sağ ok tuşu -->
+                <button class="arrow-btn" id="next-btn" title="Sonraki Model">▶</button>
+                
+                <!-- Kaysı tuş (+) -->
+                <button class="scale-btn" id="scale-up" title="Büyüt">+</button>
             </div>
         </div>
 
@@ -89,16 +145,17 @@
         import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
         import { FaceLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js";
 
-        // --- 1. MODEL AYARLARI ---
-        // Sizin talebiniz üzerine boyutlar (scale) 8 kat artırıldı.
-        // Orijinal: 0.15 -> Yeni: 1.2
-        // Orijinal: 0.16 -> Yeni: 1.28
-        // Orijinal: 0.35 -> Yeni: 2.8
+        // --- 1. MODEL AYARLARI (Boyutlar 3 kata düşürüldü) ---
         const MODELS_CONFIG = {
-            cap1:     { type: 'cap',     url: 'cap1.glb',     scale: 2.8,  yOffset: 0.18 }, // Şapka artık ilk sırada
-            glasses1: { type: 'glasses', url: 'glasses1.glb', scale: 1.2,  yOffset: 0 },
-            glasses2: { type: 'glasses', url: 'glasses2.glb', scale: 1.28, yOffset: 0 }
+            cap1:     { type: 'cap',     url: 'cap1.glb',     scale: 0.93,  yOffset: 0.18 }, // 2.8 / 3 = 0.93
+            glasses1: { type: 'glasses', url: 'glasses1.glb', scale: 0.4,   yOffset: 0 },   // 1.2 / 3 = 0.4
+            glasses2: { type: 'glasses', url: 'glasses2.glb', scale: 0.43,  yOffset: 0 }    // 1.28 / 3 = 0.43
         };
+
+        // Model Sıralaması
+        const modelKeys = ['cap1', 'glasses1', 'glasses2'];
+        let currentModelIndex = 0;
+        let modelScale = 1.0; // Ek maskalı değişkeni
 
         const video = document.getElementById("webcam");
         const status = document.getElementById("status");
@@ -142,18 +199,7 @@
                 currentModel = null;
             }
 
-            // Düğme durumlarını temizle
-            document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
-            if(key === 'none') {
-                activeKey = 'none';
-                status.innerText = "İzleme Modu";
-                return;
-            }
-
             const config = MODELS_CONFIG[key];
-            const btn = document.getElementById(`btn-${key}`);
-            if(btn) btn.classList.add('active');
-
             status.innerText = "3D Yükleniyor...";
             
             gltfLoader.load(config.url, (gltf) => {
@@ -250,7 +296,8 @@
             }
 
             currentModel.rotation.z = angle;
-            const s = faceWidth * config.scale * 10;
+            // Ek maskalı değişkeni (modelScale) uygulanıyor
+            const s = faceWidth * config.scale * modelScale * 10;
             currentModel.scale.set(s, s, s);
         }
 
@@ -302,6 +349,32 @@
         window.closePreview = () => {
             document.getElementById('photo-preview').style.display = 'none';
         };
+
+        // --- 8. BUTON YÖNETIMI ---
+        // Sonraki Model
+        document.getElementById('next-btn').addEventListener('click', () => {
+            currentModelIndex = (currentModelIndex + 1) % modelKeys.length;
+            switchModel(modelKeys[currentModelIndex]);
+        });
+
+        // Önceki Model
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            currentModelIndex = (currentModelIndex - 1 + modelKeys.length) % modelKeys.length;
+            switchModel(modelKeys[currentModelIndex]);
+        });
+
+        // Büyütme
+        document.getElementById('scale-up').addEventListener('click', () => {
+            modelScale = Math.min(3.0, modelScale + 0.1); // Max 3x büyütme
+        });
+
+        // Küçültme
+        document.getElementById('scale-down').addEventListener('click', () => {
+            modelScale = Math.max(0.3, modelScale - 0.1); // Min 0.3x küçültme
+        });
+
+        // Fotoğraf Tuşu
+        document.getElementById('photo_button').addEventListener('click', capturePhoto);
 
         // Yeniden boyutlandırma
         window.addEventListener('resize', () => {

@@ -108,12 +108,22 @@
   function toggleDropdown(dropdown, trigger, menu) {
     const isActive = dropdown.classList.contains('active');
 
-    // Close other dropdowns
+    // Close other dropdowns - ensure they are fully disabled
     document.querySelectorAll('.dropdown.active').forEach(openDropdown => {
       if (openDropdown !== dropdown) {
+        const closingMenu = openDropdown.querySelector('.dropdown-menu');
         openDropdown.classList.remove('active');
         const openTrigger = openDropdown.querySelector('.dropdown-trigger');
         if (openTrigger) openTrigger.setAttribute('aria-expanded', 'false');
+        
+        // Explicitly disable pointer events on the closed menu
+        if (closingMenu) {
+          closingMenu.style.pointerEvents = 'none';
+          // Also disable pointer events on all children to prevent hidden button clicks
+          closingMenu.querySelectorAll('*').forEach(child => {
+            child.style.pointerEvents = 'none';
+          });
+        }
       }
     });
 
@@ -121,10 +131,26 @@
     if (isActive) {
       dropdown.classList.remove('active');
       trigger.setAttribute('aria-expanded', 'false');
+      
+      // Disable pointer events on closed menu
+      if (menu) {
+        menu.style.pointerEvents = 'none';
+        menu.querySelectorAll('*').forEach(child => {
+          child.style.pointerEvents = 'none';
+        });
+      }
       updateBackdropClass();
     } else {
       dropdown.classList.add('active');
       trigger.setAttribute('aria-expanded', 'true');
+      
+      // Restore pointer events on opened menu
+      if (menu) {
+        menu.style.pointerEvents = 'auto';
+        menu.querySelectorAll('*').forEach(child => {
+          child.style.pointerEvents = 'auto';
+        });
+      }
       updateBackdropClass();
     }
   }
