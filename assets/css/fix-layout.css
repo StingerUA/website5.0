@@ -390,7 +390,6 @@
     .logo-sub-icons {
         order: 1 !important;
         flex: 0 0 auto !important;
-        margin-left: 50% !important;
         display: flex !important;
         flex-direction: row !important;
         gap: 12px !important;
@@ -604,7 +603,7 @@
         color: #9ca3af !important;
         display: inline-flex !important;
         align-items: center !important;
-        margin-left: 50% !important;
+        margin-left: 2px !important;
     }
 
     .header-inner .main-nav .dropdown-trigger:hover::after {
