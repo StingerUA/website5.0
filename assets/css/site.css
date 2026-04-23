@@ -2348,11 +2348,11 @@ main:not(.home-main),
   .page,
   .shop-container,
   .cart-page {
-    margin-top: 100px !important;
+    margin-top: 0 !important;
   }
 
   .home-main {
-    margin-top: 220px !important; /* Original 120px + 100px for dropdown space */
+    margin-top: 120px !important; /* Reduced from 220px - only original spacing */
   }
 }
 
