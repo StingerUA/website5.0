@@ -65,8 +65,8 @@
   top: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%) translateY(-8px);
-  background: linear-gradient(180deg, #001a33 0%, #003366 100%);
-  border: 1px solid #003366;
+  background: #020617 !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
   border-radius: 8px;
   border-top: none;
   border-top-left-radius: 0;
@@ -111,10 +111,10 @@
     padding: 8px;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    background: linear-gradient(180deg, #001a33 0%, #003366 100%);
-    border: 1px solid #003366;
+    background: #020617 !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
     opacity: 1;
-    z-index: 1001;
+    z-index: 2147483647 !important;
   }
 
   .main-nav .dropdown > .dropdown-trigger[href$="hizmetler.html"] + .dropdown-menu::before,
@@ -146,10 +146,10 @@
     padding: 8px;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    background: linear-gradient(180deg, #001a33 0%, #003366 100%);
-    border: 1px solid #003366;
+    background: #020617 !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
     opacity: 1;
-    z-index: 1001;
+    z-index: 2147483647 !important;
   }
 
   .main-nav .dropdown > .dropdown-trigger[href$="hakkimizda.html"] + .dropdown-menu::before,
@@ -181,10 +181,10 @@
     padding: 8px !important;
     border-radius: 8px !important;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
-    background: linear-gradient(180deg, #001a33 0%, #003366 100%) !important;
-    border: 1px solid #003366 !important;
+    background: #020617 !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
     opacity: 1 !important;
-    z-index: 10050 !important;
+    z-index: 2147483647 !important;
   }
 
   .main-nav .dropdown > .dropdown-trigger[href$="albamen.html"] + .dropdown-menu::before,
@@ -212,8 +212,8 @@
   }
 }
 
-/* Show menu on hover (desktop) */
-.dropdown:hover .dropdown-menu {
+/* Show menu when active class is added */
+.dropdown.active .dropdown-menu {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -228,13 +228,6 @@
   transform: translateY(0) !important;
 }
 
-/* Show menu when active class is added (mobile) */
-.dropdown.active .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0);
-}
 
 /* Dropdown menu items - fully clickable */
 .dropdown-menu a,
@@ -326,7 +319,7 @@
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
-    z-index: 1500 !important;
+    z-index: 2147483647 !important;
     width: min(94vw, 420px);
     max-width: 420px;
     max-height: 72vh;
@@ -348,7 +341,8 @@
       transition: transform 0.28s cubic-bezier(0.22, 1.0, 0.36, 1), opacity 0.25s ease, visibility 0.25s ease, box-shadow 0.3s ease;
     text-align: center;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
+    background: #020617 !important;
+    z-index: 2147483647 !important;
     flex: 0 0 auto;
     scroll-snap-align: center;
   }

@@ -59,47 +59,12 @@
 
     const isDesktop = window.innerWidth >= CONFIG.desktop_breakpoint;
 
-    if (isDesktop) {
-      let closeTimeoutId = null;
-
-      const clearCloseTimer = () => {
-        if (closeTimeoutId) {
-          clearTimeout(closeTimeoutId);
-          closeTimeoutId = null;
-        }
-      };
-
-      const openDropdown = () => {
-        clearCloseTimer();
-        dropdown.classList.add('active');
-        trigger.setAttribute('aria-expanded', 'true');
-      };
-
-      const scheduleCloseDropdown = () => {
-        clearCloseTimer();
-        closeTimeoutId = setTimeout(() => {
-          dropdown.classList.remove('active');
-          trigger.setAttribute('aria-expanded', 'false');
-          updateBackdropClass();
-          closeTimeoutId = null;
-        }, 2000);
-      };
-
-      dropdown.addEventListener('mouseenter', openDropdown);
-      dropdown.addEventListener('mouseleave', scheduleCloseDropdown);
-
-      menu.addEventListener('mouseenter', openDropdown);
-      menu.addEventListener('mouseleave', scheduleCloseDropdown);
-
-      trigger.addEventListener('click', e => e.preventDefault(), { once: false });
-    } else {
-      // Mobile: click to toggle
-      trigger.addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleDropdown(dropdown, trigger, menu);
-      });
-    }
+    // Click to toggle for both desktop and mobile
+    trigger.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleDropdown(dropdown, trigger, menu);
+    });
   }
 
   /**
@@ -172,16 +137,14 @@
    */
   function setupDocumentListeners() {
     document.addEventListener('click', e => {
-      if (window.innerWidth < CONFIG.desktop_breakpoint) {
-        const nav = document.querySelector('.main-nav');
-        if (nav && !nav.contains(e.target)) {
-          document.querySelectorAll('.dropdown.active').forEach(dropdown => {
-            dropdown.classList.remove('active');
-            const trigger = dropdown.querySelector('.dropdown-trigger');
-            if (trigger) trigger.setAttribute('aria-expanded', 'false');
-          });
-          updateBackdropClass();
-        }
+      const nav = document.querySelector('.main-nav');
+      if (nav && !nav.contains(e.target)) {
+        document.querySelectorAll('.dropdown.active').forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const trigger = dropdown.querySelector('.dropdown-trigger');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        });
+        updateBackdropClass();
       }
     });
 

@@ -205,12 +205,12 @@
         position: absolute !important;
         top: 50% !important;
         left: 50% !important;
-        z-index: 99999 !important; /* Let dropdown-fix-final.css override with higher value */
+        z-index: 2147483647 !important;
         visibility: hidden !important;
         pointer-events: none !important;
         display: block !important;
-        background: #111827; /* Default dark */
-        border: 1px solid #1e293b;
+        background: #020617 !important;
+        border: 1px solid rgba(255,255,255,0.08) !important;
         min-width: 200px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.8);
         padding: 8px 0;
@@ -221,12 +221,13 @@
         transform: none !important; /* No transform to avoid stacking context */
     }
     
-    /* Show dropdown on hover */
-    .header-inner .main-nav .dropdown:hover .dropdown-menu,
+    /* Show dropdown only when active (click-open) */
     .header-inner .main-nav .dropdown.active .dropdown-menu {
         visibility: visible !important;
         pointer-events: auto !important;
-        opacity: 1 !important; /* Full opacity on hover */
+        opacity: 1 !important;
+        z-index: 2147483647 !important;
+        background: #020617 !important;
     }
     
     .header-inner .main-nav .dropdown-menu a {
