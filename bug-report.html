@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AlbaSpace 5.0 — Bug Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;800&display=swap');
+
+  :root {
+    --bg: #080c14;
+    --surface: #0d1420;
+    --surface2: #131d2e;
+    --border: rgba(56,189,248,0.12);
+    --accent: #00c2ff;
+    --red: #f43f5e;
+    --orange: #fb923c;
+    --yellow: #fbbf24;
+    --green: #22d3a0;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, #0a1628 0%, #0d1f3a 50%, #060d18 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(0,194,255,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .header-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+
+  .header h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .header h1 span { color: var(--accent); }
+
+  .header-sub {
+    color: var(--muted);
+    font-size: 14px;
+    font-family: var(--mono);
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 24px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+
+  .stat-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .stat-chip.critical { background: rgba(244,63,94,0.12); border: 1px solid rgba(244,63,94,0.3); color: #f87171; }
+  .stat-chip.warning  { background: rgba(251,146,60,0.12); border: 1px solid rgba(251,146,60,0.3); color: #fb923c; }
+  .stat-chip.info     { background: rgba(250,204,21,0.10); border: 1px solid rgba(250,204,21,0.3); color: #fbbf24; }
+  .stat-chip.debt     { background: rgba(34,211,160,0.10); border: 1px solid rgba(34,211,160,0.2); color: #22d3a0; }
+
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot.red    { background: #f43f5e; }
+  .dot.orange { background: #fb923c; }
+  .dot.yellow { background: #fbbf24; }
+  .dot.green  { background: #22d3a0; }
+
+  /* ── MAIN ── */
+  .main { max-width: 960px; margin: 0 auto; padding: 40px 24px 0; }
+
+  /* ── SECTION ── */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 48px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── BUG CARD ── */
+  .bug-card {
+    background: var(--surface);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .bug-card:hover {
+    border-color: rgba(56,189,248,0.25);
+    transform: translateY(-1px);
+  }
+
+  .bug-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .bug-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    min-width: 28px;
+    margin-top: 2px;
+  }
+
+  .severity-badge {
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  .sev-critical { background: rgba(244,63,94,0.15); color: #f87171; border: 1px solid rgba(244,63,94,0.3); }
+  .sev-major    { background: rgba(251,146,60,0.12); color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
+  .sev-minor    { background: rgba(250,204,21,0.10); color: #fbbf24; border: 1px solid rgba(250,204,21,0.3); }
+  .sev-debt     { background: rgba(34,211,160,0.08); color: #34d399; border: 1px solid rgba(34,211,160,0.2); }
+
+  .bug-title-area { flex: 1; }
+
+  .bug-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .bug-location {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .bug-body {
+    padding: 0 24px 20px 68px;
+    display: none;
+  }
+
+  .bug-body.open { display: block; }
+
+  .bug-desc {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+
+  .code-block {
+    background: #060b12;
+    border: 1px solid rgba(56,189,248,0.1);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+  }
+
+  .code-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .code-label.bad  { color: #f87171; }
+  .code-label.good { color: #22d3a0; }
+
+  .code-label::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+
+  .code-label.bad::before  { background: #f43f5e; }
+  .code-label.good::before { background: #22d3a0; }
+
+  pre {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .highlight-bad  { color: #f87171; background: rgba(244,63,94,0.1); border-radius: 3px; padding: 0 3px; }
+  .highlight-good { color: #22d3a0; background: rgba(34,211,160,0.1); border-radius: 3px; padding: 0 3px; }
+
+  .fix-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(34,211,160,0.08);
+    border: 1px solid rgba(34,211,160,0.2);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: #22d3a0;
+    font-family: var(--mono);
+    margin-top: 8px;
+  }
+
+  /* ── EXPANDABLE ── */
+  .chevron {
+    margin-left: auto;
+    color: var(--muted);
+    transition: transform 0.2s;
+    font-size: 18px;
+    line-height: 1;
+    margin-top: 1px;
+    user-select: none;
+  }
+
+  .bug-header.open .chevron { transform: rotate(180deg); }
+
+  /* ── SUMMARY TABLE ── */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 12px;
+    margin-top: 16px;
+  }
+
+  .summary-table th {
+    padding: 10px 16px;
+    text-align: left;
+    background: var(--surface2);
+    color: var(--muted);
+    letter-spacing: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .summary-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(56,189,248,0.05);
+    vertical-align: top;
+  }
+
+  .summary-table tr:last-child td { border-bottom: none; }
+  .summary-table tr:hover td { background: rgba(56,189,248,0.02); }
+
+  /* responsive */
+  @media (max-width: 600px) {
+    .header { padding: 32px 20px; }
+    .bug-header { flex-wrap: wrap; }
+    .bug-body { padding: 0 16px 16px 16px; }
+    .stats-row { gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">Code Audit · AlbaSpace</div>
+  <h1>website<span>5.0</span> — Bug Report</h1>
+  <div class="header-sub">Repo: github.com/StingerUA/website5.0 · Проверено: апрель 2026</div>
+  <div class="stats-row">
+    <div class="stat-chip critical"><div class="dot red"></div>5 критических</div>
+    <div class="stat-chip warning"><div class="dot orange"></div>4 серьёзных</div>
+    <div class="stat-chip info"><div class="dot yellow"></div>2 незначительных</div>
+    <div class="stat-chip debt"><div class="dot green"></div>12 файлов CSS-долга</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ─── CRITICAL ─── -->
+  <div class="section-label">🔴 Критические баги</div>
+
+  <!-- BUG 1 -->
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#01</span>
+      <span class="severity-badge sev-critical">CRITICAL</span>
+      <div class="bug-title-area">
+        <div class="bug-title">Сломанная SVG-иконка кнопки «Отправить»</div>
+        <div class="bug-location">assets/js/include.js · строка 331</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        В inline SVG кнопки отправки сообщения атрибут <code>y2</code> написан как <code>y</code> — это сломает рендер линии. Кнопка визуально отображается с неполной иконкой.
+      </div>
+      <div class="code-block">
+        <div class="code-label bad">Баг (строка 331)</div>
+        <pre>&lt;line x1="22" y1="2" x2="11" <span class="highlight-bad">y="13"</span>&gt;&lt;/line&gt;</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label good">Исправление</div>
+        <pre>&lt;line x1="22" y1="2" x2="11" <span class="highlight-good">y2="13"</span>&gt;&lt;/line&gt;</pre>
+      </div>
+      <span class="fix-tag">✓ Правка в одной строке</span>
+    </div>
+  </div>
+
+  <!-- BUG 2 -->
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#02</span>
+      <span class="severity-badge sev-critical">CRITICAL</span>
+      <div class="bug-title-area">
+        <div class="bug-title">Невидимый текст на кнопке «Çerez Ayarları»</div>
+        <div class="bug-location">index.html · строка ~115</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        Кнопка настроек cookie получила <code>background: #fff</code> и <code>color: #ffffff</code> — белый текст на белом фоне. Пользователь не видит текст кнопки вообще.
+      </div>
+      <div class="code-block">
+        <div class="code-label bad">Баг</div>
+        <pre>.btn-settings {
+  background-color: #fff;
+  color: <span class="highlight-bad">#ffffff</span>;  /* белый на белом! */
+}</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label good">Исправление</div>
+        <pre>.btn-settings {
+  background-color: #fff;
+  color: <span class="highlight-good">#000000</span>;
+}</pre>
+      </div>
+      <span class="fix-tag">✓ Быстрое исправление</span>
+    </div>
+  </div>
+
+  <!-- BUG 3 -->
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#03</span>
+      <span class="severity-badge sev-critical">CRITICAL</span>
+      <div class="bug-title-area">
+        <div class="bug-title">strings.talkPrompt не определён → рендерит «undefined»</div>
+        <div class="bug-location">assets/js/include.js · строка 312 (функция injectAiWidget)</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        В функции <code>injectAiWidget()</code> объект <code>strings</code> не содержит ключа <code>talkPrompt</code> — он есть только в <code>injectVoiceWidget()</code> и <code>injectUnifiedAiWidget()</code>. В результате элемент статуса голосового виджета отображает буквально слово «undefined».
+      </div>
+      <div class="code-block">
+        <div class="code-label bad">Баг (строка 312)</div>
+        <pre>${strings.<span class="highlight-bad">talkPrompt</span>}  // → "undefined" в DOM</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label good">Исправление — добавить в объект strings</div>
+        <pre>const strings = isEn ? {
+  placeholder: 'Send a message...',
+  ...
+  <span class="highlight-good">talkPrompt: 'Tap and Talk 🔊',</span>
+} : {
+  placeholder: 'Bir mesaj yazın...',
+  ...
+  <span class="highlight-good">talkPrompt: 'Tıkla ve Konuş 🔊',</span>
+};</pre>
+      </div>
+      <span class="fix-tag">✓ Добавить 2 строки в объект strings</span>
+    </div>
+  </div>
+
+  <!-- BUG 4 -->
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#04</span>
+      <span class="severity-badge sev-critical">CRITICAL</span>
+      <div class="bug-title-area">
+        <div class="bug-title">Дублирующиеся HTML id — ai-messages-list, ai-input-field</div>
+        <div class="bug-location">assets/js/include.js · injectAiWidget() + injectUnifiedAiWidget()</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        Оба виджета (<code>injectAiWidget</code> и <code>injectUnifiedAiWidget</code>) создают элементы с одинаковыми ID: <code>ai-messages-list</code> и <code>ai-input-field</code>. Браузер использует только первый найденный элемент при вызове <code>document.getElementById()</code> — второй виджет полностью сломан: сообщения не отправляются, история не заполняется.
+      </div>
+      <div class="code-block">
+        <div class="code-label bad">Дублирование ID</div>
+        <pre>// в injectAiWidget():
+id="<span class="highlight-bad">ai-messages-list</span>"
+id="<span class="highlight-bad">ai-input-field</span>"
+
+// снова в injectUnifiedAiWidget():
+id="<span class="highlight-bad">ai-messages-list</span>"   // коллизия!
+id="<span class="highlight-bad">ai-input-field</span>"     // коллизия!</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label good">Решение</div>
+        <pre>// injectAiWidget() — устаревший, не вызывается.
+// Удалить его целиком ИЛИ переименовать ID:
+id="ai-messages-list-<span class="highlight-good">legacy</span>"
+id="ai-input-field-<span class="highlight-good">legacy</span>"</pre>
+      </div>
+      <span class="fix-tag">✓ Удалить мёртвый код injectAiWidget()</span>
+    </div>
+  </div>
+
+  <!-- BUG 5 -->
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#05</span>
+      <span class="severity-badge sev-critical">CRITICAL</span>
+      <div class="bug-title-area">
+        <div class="bug-title">Двойная отправка сообщения (keydown + keypress)</div>
+        <div class="bug-location">assets/js/include.js · строки 498 и 504</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        На поле ввода AI-чата навешено два обработчика нажатия Enter: один на <code>keydown</code>, другой на <code>keypress</code>. Во многих браузерах (Chrome, Edge) оба срабатывают — одно нажатие Enter отправляет сообщение дважды.
+      </div>
+      <div class="code-block">
+        <div class="code-label bad">Баг — оба обработчика активны</div>
+        <pre>inputField.addEventListener('<span class="highlight-bad">keydown</span>', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) sendMessage();
+});
+
+inputField.addEventListener('<span class="highlight-bad">keypress</span>', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) sendMessage();
+});</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label good">Исправление — оставить только один</div>
+        <pre>inputField.addEventListener('<span class="highlight-good">keydown</span>', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+// keypress — удалить</pre>
+      </div>
+      <span class="fix-tag">✓ Удалить лишний обработчик keypress</span>
+    </div>
+  </div>
+
+  <!-- ─── MAJOR ─── -->
+  <div class="section-label">🟠 Серьёзные баги</div>
+
+  <!-- BUG 6 -->
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#06</span>
+      <span class="severity-badge sev-major">MAJOR</span>
+      <div class="bug-title-area">
+        <div class="bug-title">Кириллица в турецком тексте («докунун»)</div>
+        <div class="bug-location">assets/js/include.js · строка 1068</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        В турецкой версии подсказки карты использовано кириллическое слово «докунун» вместо турецкого «dokunun». Это лишает турецкоязычного пользователя читаемого текста.
+      </div>
+      <div class="code-block">
+        <div class="code-label bad">Баг</div>
+        <pre>'Haritayı açmak için <span class="highlight-bad">докунун</span>'</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label good">Исправление</div>
+        <pre>'Haritayı açmak için <span class="highlight-good">dokunun</span>'</pre>
+      </div>
+      <span class="fix-tag">✓ Правка одного слова</span>
+    </div>
+  </div>
+
+  <!-- BUG 7 -->
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#07</span>
+      <span class="severity-badge sev-major">MAJOR</span>
+      <div class="bug-title-area">
+        <div class="bug-title">Дублирующийся тег favicon</div>
+        <div class="bug-location">index.html · строки 9–10</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        Тег <code>&lt;link rel="icon"&gt;</code> повторяется дважды подряд — одинаковые строки. Это лишний запрос к серверу при загрузке страницы.
+      </div>
+      <div class="code-block">
+        <div class="code-label bad">Баг — строки 9 и 10 идентичны</div>
+        <pre>&lt;link rel="icon" href="/assets/icons/AlbaLogo.png" sizes="32x32"&gt;
+<span class="highlight-bad">&lt;link rel="icon" href="/assets/icons/AlbaLogo.png" sizes="32x32"&gt;</span>  ← дубль!</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label good">Исправление — удалить вторую строку</div>
+        <pre>&lt;link rel="icon" href="/assets/icons/AlbaLogo.png" sizes="32x32"&gt;</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUG 8 -->
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#08</span>
+      <span class="severity-badge sev-major">MAJOR</span>
+      <div class="bug-title-area">
+        <div class="bug-title">Placeholder-изображения в продакшне</div>
+        <div class="bug-location">index.html — секция «Referanslarımız» и «Çözüm Ortaklarımız»</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        10 логотипов партнёров используют файлы <code>placeholder-logo1.jpg</code> — <code>placeholder-logo30.jpg</code>. Это выглядит незаконченно и подрывает доверие к сайту. Все alt-тексты также неинформативны (<code>alt="Logo"</code>).
+      </div>
+      <div class="code-block">
+        <div class="code-label bad">Баг</div>
+        <pre>&lt;img src="/assets/images/<span class="highlight-bad">placeholder-logo1.jpg</span>" alt="<span class="highlight-bad">Logo</span>"&gt;</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label good">Нужно</div>
+        <pre>&lt;img src="/assets/images/<span class="highlight-good">partner-toyota.png</span>" alt="<span class="highlight-good">Toyota</span>"&gt;</pre>
+      </div>
+      <span class="fix-tag">⚠ Требуется добавить реальные логотипы</span>
+    </div>
+  </div>
+
+  <!-- BUG 9 -->
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#09</span>
+      <span class="severity-badge sev-major">MAJOR</span>
+      <div class="bug-title-area">
+        <div class="bug-title">ai-widget.js содержит устаревший виджет на русском</div>
+        <div class="bug-location">assets/js/ai-widget.js · строки 8–16</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        Файл <code>ai-widget.js</code> создаёт резервный виджет-чат с захардкоженным русским текстом («Привет! Как помочь?», «Напишите сообщение...», «Отправить»). Если <code>include.js</code> не успеет загрузиться, пользователь увидит виджет на русском языке на турецком/английском сайте.
+      </div>
+      <div class="code-block">
+        <div class="code-label bad">Захардкоженный русский текст в fallback</div>
+        <pre>panel.innerHTML = `
+  ...
+  &lt;div class="ai-widget-body"&gt;<span class="highlight-bad">Привет! Как помочь?</span>&lt;/div&gt;
+  &lt;input placeholder="<span class="highlight-bad">Напишите сообщение...</span>"&gt;
+  &lt;button class="ai-send"&gt;<span class="highlight-bad">Отправить</span>&lt;/button&gt;
+`;</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label good">Решение</div>
+        <pre>// Определять язык динамически:
+const isEn = window.location.pathname.startsWith('/eng/');
+const fallbackText = isEn 
+  ? { greeting: 'Hi! How can I help?', placeholder: 'Type a message...', send: 'Send' }
+  : { greeting: 'Nasıl yardımcı olabilirim?', placeholder: 'Mesaj yazın...', send: 'Gönder' };</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── MINOR ─── -->
+  <div class="section-label">🟡 Незначительные</div>
+
+  <!-- BUG 10 -->
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#10</span>
+      <span class="severity-badge sev-minor">MINOR</span>
+      <div class="bug-title-area">
+        <div class="bug-title">.btn-primary без background в базовом стиле</div>
+        <div class="bug-location">index.html · стиль .btn-primary</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        Базовое правило <code>.btn-primary</code> задаёт только цвет текста и тени, но не задаёт <code>background</code>. Синий фон применяется через отдельный блок <code>&lt;style&gt;</code> в конце с флагом <code>!important</code>. Это хрупко — если переопределение не загрузится или будет переписано, кнопка будет прозрачной.
+      </div>
+      <div class="code-block">
+        <div class="code-label bad">Баг — background задаётся только через override</div>
+        <pre>.btn-primary {
+  color: #020617;
+  /* background — отсутствует! */
+}
+/* ... намного позже: */
+.btn-primary { background: var(--accent) !important; }</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label good">Исправление — добавить в основное правило</div>
+        <pre>.btn-primary {
+  <span class="highlight-good">background: var(--accent);</span>
+  color: #020617;
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUG 11 -->
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#11</span>
+      <span class="severity-badge sev-minor">MINOR</span>
+      <div class="bug-title-area">
+        <div class="bug-title">3 отдельных блока &lt;style&gt; в &lt;head&gt; вместо одного</div>
+        <div class="bug-location">index.html · строки 25, 88, 80</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        Стили главной страницы разбиты на три отдельных тега <code>&lt;style&gt;</code> в <code>&lt;head&gt;</code>, включая блок «Override» который перекрывает предыдущий блок. Это признак многократных несогласованных правок. Желательно объединить всё в один блок или вынести в <code>site.css</code>.
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── TECH DEBT ─── -->
+  <div class="section-label">🟢 CSS-технический долг</div>
+
+  <div class="bug-card">
+    <div class="bug-header" onclick="toggle(this)">
+      <span class="bug-number">#12</span>
+      <span class="severity-badge sev-debt">TECH DEBT</span>
+      <div class="bug-title-area">
+        <div class="bug-title">12 CSS-файлов с «заплатками» вместо чистого решения</div>
+        <div class="bug-location">assets/css/</div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="bug-body">
+      <div class="bug-desc">
+        В папке <code>assets/css/</code> накопилось 12 файлов с именами вроде <code>dropdown-nuclear.css</code>, <code>dropdown-fix-final.css</code>, <code>product-final-overrides.css</code>, <code>model-nav-overrides2.css</code>. Это говорит о том, что дропдауны и z-index чинились многократно поверх друг друга, не решая корень проблемы. Это замедляет загрузку, усложняет отладку и приводит к непредсказуемому поведению стилей.
+      </div>
+      <div class="code-block">
+        <div class="code-label bad">Проблемные файлы (12 штук)</div>
+        <pre>dropdown-fix-final.css
+dropdown-nuclear.css        ← "ядерный" — значит что-то пошло не так
+dropdown-optimized.css
+dropdown-portal.css
+dropdown-z-index-fix.css
+content-z-index-fix.css
+fix-layout.css
+model-nav-overrides.css
+model-nav-overrides<span class="highlight-bad">2</span>.css   ← вторая версия переопределения
+product-final-overrides.css
+product-overrides.css
+shop-neon-overrides.css</pre>
+      </div>
+      <div class="code-block">
+        <div class="code-label good">Рекомендация</div>
+        <pre>// 1. Определить один правильный z-index стек:
+:root {
+  --z-dropdown: 200;
+  --z-header:   300;
+  --z-modal:    1000;
+  --z-toast:    2000;
+}
+// 2. Объединить все правки дропдаунов в один файл
+// 3. Удалить все *-overrides.css и *-fix.css файлы</pre>
+      </div>
+      <span class="fix-tag">⚠ Требует рефакторинга dropdown-системы</span>
+    </div>
+  </div>
+
+  <!-- ─── SUMMARY ─── -->
+  <div class="section-label">📋 Сводка приоритетов</div>
+
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Файл</th>
+        <th>Проблема</th>
+        <th>Приоритет</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>01</td>
+        <td>include.js:331</td>
+        <td>SVG y → y2 (сломана иконка отправки)</td>
+        <td style="color:#f87171">CRITICAL</td>
+      </tr>
+      <tr>
+        <td>02</td>
+        <td>index.html</td>
+        <td>Невидимый текст кнопки cookie (#fff on #fff)</td>
+        <td style="color:#f87171">CRITICAL</td>
+      </tr>
+      <tr>
+        <td>03</td>
+        <td>include.js:312</td>
+        <td>strings.talkPrompt = undefined в DOM</td>
+        <td style="color:#f87171">CRITICAL</td>
+      </tr>
+      <tr>
+        <td>04</td>
+        <td>include.js</td>
+        <td>Дубли ID: ai-messages-list, ai-input-field</td>
+        <td style="color:#f87171">CRITICAL</td>
+      </tr>
+      <tr>
+        <td>05</td>
+        <td>include.js:498,504</td>
+        <td>keydown + keypress → двойная отправка</td>
+        <td style="color:#f87171">CRITICAL</td>
+      </tr>
+      <tr>
+        <td>06</td>
+        <td>include.js:1068</td>
+        <td>«докунун» — кириллица вместо турецкого</td>
+        <td style="color:#fb923c">MAJOR</td>
+      </tr>
+      <tr>
+        <td>07</td>
+        <td>index.html:9-10</td>
+        <td>Дублирующийся тег favicon</td>
+        <td style="color:#fb923c">MAJOR</td>
+      </tr>
+      <tr>
+        <td>08</td>
+        <td>index.html</td>
+        <td>Placeholder-логотипы в продакшне</td>
+        <td style="color:#fb923c">MAJOR</td>
+      </tr>
+      <tr>
+        <td>09</td>
+        <td>ai-widget.js</td>
+        <td>Fallback-виджет с русским текстом</td>
+        <td style="color:#fb923c">MAJOR</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>index.html</td>
+        <td>.btn-primary без background в базе</td>
+        <td style="color:#fbbf24">MINOR</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>index.html</td>
+        <td>3 блока &lt;style&gt; вместо одного</td>
+        <td style="color:#fbbf24">MINOR</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>assets/css/</td>
+        <td>12 CSS-файлов с override-заплатками</td>
+        <td style="color:#34d399">DEBT</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    body.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

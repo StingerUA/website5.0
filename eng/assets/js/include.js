@@ -11,10 +11,16 @@ runAfterDomReady(() => {
   // Ensure a valid favicon is present
   (function ensureFavicon() {
     try {
-      const existing = document.querySelector('link[rel~="icon"]');
-      if (existing) {
-        if (existing.getAttribute('href') === '/favicon.png') {
-          existing.setAttribute('href', '/assets/images/albalogo.png');
+      const icons = Array.from(document.querySelectorAll('link[rel~="icon"]'));
+      const primary = icons[0];
+      if (icons.length > 1) {
+        icons.slice(1).forEach((icon) => {
+          if (icon.parentNode) icon.parentNode.removeChild(icon);
+        });
+      }
+      if (primary) {
+        if (primary.getAttribute('href') === '/favicon.png') {
+          primary.setAttribute('href', '/assets/images/albalogo.png');
         }
         return;
       }
@@ -157,12 +163,14 @@ runAfterDomReady(() => {
       placeholder: 'Send a message...',
       listening: 'Listening...',
       initialStatus: 'How can I help you today?', // Статус стал нейтральным
+      talkPrompt: 'Tap and Talk 🔊',
       welcomeBack: 'Welcome back, ', // Приветствие для старых друзей
       voiceNotSupported: 'Voice not supported'
     } : {
       placeholder: 'Bir mesaj yazın...',
       listening: 'Dinliyorum...',
       initialStatus: 'Bugün sana nasıl yardım edebilirim?',
+      talkPrompt: 'Tıkla ve Konuş 🔊',
       welcomeBack: 'Tekrar hoş geldin, ',
       voiceNotSupported: 'Ses desteği yok'
     };
@@ -210,14 +218,14 @@ runAfterDomReady(() => {
         <button class="ai-close-icon" id="ai-close-btn">×</button>
       </div>
       <div class="ai-panel-body">
-        <div class="ai-messages-list" id="ai-messages-list"></div>
+        <div class="ai-messages-list" id="ai-messages-list-legacy"></div>
         <div class="ai-chat-avatar-large"><img src="${avatarSrc}" alt="Albamen"></div>
         <div class="ai-status-text" id="ai-status-text">${strings.initialStatus}</div>
         <div class="ai-input-area">
           <button class="ai-action-btn ai-mic-btn-panel" id="ai-mic-btn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
           </button>
-          <input type="text" class="ai-input" id="ai-input-field" placeholder="${strings.placeholder}">
+          <input type="text" class="ai-input" id="ai-input-field-legacy" placeholder="${strings.placeholder}">
           <button class="ai-action-btn ai-send-btn-panel" id="ai-send-btn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>
@@ -267,8 +275,8 @@ runAfterDomReady(() => {
     const closeBtn = document.getElementById('ai-close-btn');
     const sendBtn = document.getElementById('ai-send-btn');
     const micBtn = document.getElementById('ai-mic-btn');
-    const inputField = document.getElementById('ai-input-field');
-    const msgList = document.getElementById('ai-messages-list');
+    const inputField = document.getElementById('ai-input-field-legacy');
+    const msgList = document.getElementById('ai-messages-list-legacy');
     const statusText = document.getElementById('ai-status-text');
 
     const openPanel = (evt) => {
@@ -730,12 +738,14 @@ function injectFooterStyles() {
       placeholder: 'Send a message...',
       listening: 'Listening...',
       initialStatus: 'How can I help you today?', // Статус стал нейтральным
+      talkPrompt: 'Tap and Talk 🔊',
       welcomeBack: 'Welcome back, ', // Приветствие для старых друзей
       voiceNotSupported: 'Voice not supported'
     } : {
       placeholder: 'Bir mesaj yazın...',
       listening: 'Dinliyorum...',
       initialStatus: 'Bugün sana nasıl yardım edebilirim?',
+      talkPrompt: 'Tıkla ve Konuş 🔊',
       welcomeBack: 'Tekrar hoş geldin, ',
       voiceNotSupported: 'Ses desteği yok'
     };
@@ -783,14 +793,14 @@ function injectFooterStyles() {
         <button class="ai-close-icon" id="ai-close-btn">×</button>
       </div>
       <div class="ai-panel-body">
-        <div class="ai-messages-list" id="ai-messages-list"></div>
+        <div class="ai-messages-list" id="ai-messages-list-legacy"></div>
         <div class="ai-chat-avatar-large"><img src="${avatarSrc}" alt="Albamen"></div>
         <div class="ai-status-text" id="ai-status-text">${strings.initialStatus}</div>
         <div class="ai-input-area">
           <button class="ai-action-btn ai-mic-btn-panel" id="ai-mic-btn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
           </button>
-          <input type="text" class="ai-input" id="ai-input-field" placeholder="${strings.placeholder}">
+          <input type="text" class="ai-input" id="ai-input-field-legacy" placeholder="${strings.placeholder}">
           <button class="ai-action-btn ai-send-btn-panel" id="ai-send-btn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>
@@ -804,8 +814,8 @@ function injectFooterStyles() {
     const closeBtn = document.getElementById('ai-close-btn');
     const sendBtn = document.getElementById('ai-send-btn');
     const micBtn = document.getElementById('ai-mic-btn');
-    const inputField = document.getElementById('ai-input-field');
-    const msgList = document.getElementById('ai-messages-list');
+    const inputField = document.getElementById('ai-input-field-legacy');
+    const msgList = document.getElementById('ai-messages-list-legacy');
     const statusText = document.getElementById('ai-status-text');
 
     const openPanel = (evt) => {

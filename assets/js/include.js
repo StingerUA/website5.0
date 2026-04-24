@@ -26,10 +26,16 @@ runAfterDomReady(() => {
   // 2. Favicon
   (function ensureFavicon() {
     try {
-      const existing = document.querySelector('link[rel~="icon"]');
-      if (existing) {
-        if (existing.getAttribute('href') === '/favicon.png') {
-          existing.setAttribute('href', '/assets/images/albalogo.png');
+      const icons = Array.from(document.querySelectorAll('link[rel~="icon"]'));
+      let primary = icons[0];
+      if (icons.length > 1) {
+        icons.slice(1).forEach((icon) => {
+          if (icon.parentNode) icon.parentNode.removeChild(icon);
+        });
+      }
+      if (primary) {
+        if (primary.getAttribute('href') === '/favicon.png') {
+          primary.setAttribute('href', '/assets/images/albalogo.png');
         }
         return;
       }
@@ -227,6 +233,7 @@ runAfterDomReady(() => {
       listening: 'Listening...',
       connect: 'Connecting...',
       initialStatus: 'How can I help you today?',
+      talkPrompt: 'Tap and Talk 🔊',
       welcomeBack: 'Welcome back, ',
       voiceNotSupported: 'Voice not supported',
       connectionError: 'Connection error.'
@@ -235,6 +242,7 @@ runAfterDomReady(() => {
       listening: 'Dinliyorum...',
       connect: 'Bağlanıyor...',
       initialStatus: 'Bugün sana nasıl yardım edebilirim?',
+      talkPrompt: 'Tıkla ve Konuş 🔊',
       welcomeBack: 'Tekrar hoş geldin, ',
       voiceNotSupported: 'Ses desteği yok',
       connectionError: 'Bağlantı hatası.'
@@ -306,7 +314,7 @@ runAfterDomReady(() => {
         </div>
       </div>
       <div class="ai-panel-body">
-        <div class="ai-messages-list" id="ai-messages-list"></div>
+        <div class="ai-messages-list" id="ai-messages-list-legacy"></div>
         <div class="ai-chat-avatar-large"><img src="${avatarSrc}" alt="Albamen"></div>
         <div class="ai-status-text" id="ai-status-text">${strings.initialStatus}</div>
         <div class="ai-status-text ai-voice-status" id="voice-status-text" style="display:none;">${strings.talkPrompt}</div>
@@ -325,7 +333,7 @@ runAfterDomReady(() => {
               <line x1="8" y1="23" x2="16" y2="23"></line>
             </svg>
           </button>
-          <input type="text" class="ai-input" id="ai-input-field" placeholder="${strings.placeholder}">
+          <input type="text" class="ai-input" id="ai-input-field-legacy" placeholder="${strings.placeholder}">
           <button class="ai-action-btn ai-send-btn-panel" id="ai-send-btn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="22" y1="2" x2="11" y="13"></line>
@@ -379,8 +387,8 @@ runAfterDomReady(() => {
     const closeBtn = document.getElementById('ai-close-btn');
     const sendBtn = document.getElementById('ai-send-btn');
     const micBtn = document.getElementById('ai-mic-btn');
-    const inputField = document.getElementById('ai-input-field');
-    const msgList = document.getElementById('ai-messages-list');
+    const inputField = document.getElementById('ai-input-field-legacy');
+    const msgList = document.getElementById('ai-messages-list-legacy');
     const statusText = document.getElementById('ai-status-text');
 
     const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition || null;
@@ -496,12 +504,6 @@ runAfterDomReady(() => {
 
     sendBtn.addEventListener('click', sendMessage);
     inputField.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    });
-    inputField.addEventListener('keypress', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         sendMessage();
@@ -1065,7 +1067,7 @@ function enhanceFooter(root) {
   const branchOfficeRegex = isEnglish ? /Branch Office/i : /Adana Şube/i;
   const phoneHint = isEnglish ? 'Tap to call' : 'Aramak için dokunun';
   const emailHint = isEnglish ? 'Write to us' : 'Bize yazın';
-  const mapHint = isEnglish ? 'Tap to open map' : 'Haritayı açmak için докунун';
+  const mapHint = isEnglish ? 'Tap to open map' : 'Haritayı açmak için dokunun';
   const merkezBlock = extractSection(rawAddrText, headOfficeRegex, branchOfficeRegex);
   const mailAnchors = footer.querySelectorAll('a[href^="mailto:"]');
   mailAnchors.forEach((el) => el.remove());

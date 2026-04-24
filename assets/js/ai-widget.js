@@ -1,18 +1,48 @@
 (function(){
+  function getFallbackWidgetStrings() {
+    const pageLang = (document.documentElement.lang || '').toLowerCase();
+    const isEnglish = pageLang.startsWith('en') || window.location.pathname.startsWith('/eng/');
+    const isRussian = pageLang.startsWith('ru') || window.location.pathname.startsWith('/rus/');
+    if (isEnglish) {
+      return {
+        title: 'AI Assistant',
+        body: 'Hello! How can I help?',
+        placeholder: 'Send a message...',
+        send: 'Send'
+      };
+    }
+    if (isRussian) {
+      return {
+        title: 'AI Ассистент',
+        body: 'Привет! Как помочь?',
+        placeholder: 'Напишите сообщение...',
+        send: 'Отправить'
+      };
+    }
+
+    return {
+      title: 'AI Asistan',
+      body: 'Merhaba! Nasıl yardımcı olabilirim?',
+      placeholder: 'Bir mesaj yazın...',
+      send: 'Gönder'
+    };
+  }
+
   function createPanel(){
     if (document.querySelector('.ai-widget-panel')) return document.querySelector('.ai-widget-panel');
+    const strings = getFallbackWidgetStrings();
     const panel = document.createElement('div');
     panel.className = 'ai-widget-panel';
     panel.setAttribute('role','dialog');
     panel.innerHTML = `
       <div class="ai-widget-header">
-        <strong>AI Assistant</strong>
+        <strong>${strings.title}</strong>
         <button class="ai-close" aria-label="Close">✕</button>
       </div>
-      <div class="ai-widget-body">Привет! Как помочь?</div>
+      <div class="ai-widget-body">${strings.body}</div>
       <div class="ai-widget-input">
-        <input type="text" placeholder="Напишите сообщение..." aria-label="Message input">
-        <button class="ai-send">Отправить</button>
+        <input type="text" placeholder="${strings.placeholder}" aria-label="Message input">
+        <button class="ai-send">${strings.send}</button>
       </div>
     `;
     document.body.appendChild(panel);
