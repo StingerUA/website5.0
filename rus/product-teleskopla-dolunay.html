@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="product-text-black">
+<html lang="ru" class="product-text-black">
 <head>
   <!-- Универсальный favicon-блок -->
   <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
@@ -11,25 +11,20 @@
   <meta name="msapplication-TileImage" content="/favicon.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>T-Shirt  Alba Space</title>
+  <title>Билет на наблюдение полнолуния через телескоп – Alba Space</title>
   
-  <!--    (   ) -->
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/fix-layout.css">
   <link rel="stylesheet" href="/assets/css/product-overrides.css">
   
-  <!-- Tailwind       -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   
-  <!--    -->
   <script src="/assets/js/include.js" defer></script>
   <script src="/assets/js/menu-toggle.js" defer></script>
   <script src="/assets/js/cart.js" defer></script>
-  <!-- product-gallery.js  ,         -->
 
   <style>
-    /*    */
     :root {
       --header-bg: #020617;
       --accent: #00c2ff;
@@ -46,7 +41,6 @@
       overflow-x: hidden;
     }
 
-    /*  */
     .space-bg {
       position: fixed;
       top: 0;
@@ -58,7 +52,6 @@
       pointer-events: none;
     }
 
-    /*  */
     .main-image-container {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -83,7 +76,6 @@
       transform: translateY(-2px);
     }
 
-    /*  */
     .btn-glow {
       background: var(--accent);
       box-shadow: 0 0 20px rgba(0, 194, 255, 0.3);
@@ -100,14 +92,12 @@
       display: none;
     }
 
-    /*   */
     .glass-card {
       background: rgba(17, 24, 39, 0.7);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /*  */
     .reveal {
       opacity: 0;
       transform: translateY(20px);
@@ -119,20 +109,6 @@
       transform: translateY(0);
     }
 
-    /*   */
-    .payment-icons img {
-      height: 24px;
-      width: auto;
-      object-fit: contain;
-      opacity: 1;
-      transition: opacity 0.3s ease;
-    }
-    
-    .payment-icons img:hover {
-      opacity: 1;
-    }
-        /* ===== Local overrides to beat global site.css ===== */
-    /* Ensure main product image is reduced to 70% and not limited by global rules */
     #mainImage,
     .main-image-container img {
       width: 70% !important;
@@ -144,7 +120,6 @@
       border-radius: 24px !important;
     }
 
-    /* Thumbnails: force square shape with rounded corners */
     .thumb-btn {
       width: 80px !important;
       height: 80px !important;
@@ -169,102 +144,89 @@
   <link rel="stylesheet" href="/assets/css/product-text-black.css">
 </head>
 <body>
-  <!--    -->
-  <div data-include="/header-en-black"></div>
-
-  
+  <div data-include="/header-ru-black"></div>
 
   <main class="max-w-7xl mx-auto px-4 py-8 md:py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start product-grid">
-      
-      <!--  -->
       <div class="reveal">
         <div class="main-image-container mb-6">
-          <img id="mainImage" src="/assets/images/shirt11.png" alt="T-Shirt" class="w-full h-auto object-cover aspect-[4/5]">
+          <img id="mainImage" src="/assets/images/albaspaceshop_eb477f8cc10d14b917f64623a461cf38.png" alt="Билет на наблюдение полнолуния через телескоп" class="w-full h-auto object-cover aspect-[4/5]">
         </div>
         <div class="flex gap-4 overflow-x-auto pb-2" id="galleryThumbs">
-          <button class="thumb-btn active rounded-xl flex-shrink-0 w-20 h-20 md:w-24 md:h-24 overflow-hidden" onclick="changeImage(this, '/assets/images/shirt11.png')">
-            <img src="/assets/images/shirt11.png" class="w-full h-full object-cover">
+          <button class="thumb-btn active rounded-xl flex-shrink-0 w-20 h-20 md:w-24 md:h-24 overflow-hidden" onclick="changeImage(this, '/assets/images/albaspaceshop_eb477f8cc10d14b917f64623a461cf38.png')">
+            <img src="/assets/images/albaspaceshop_eb477f8cc10d14b917f64623a461cf38.png" class="w-full h-full object-cover" alt="Билет на наблюдение полнолуния через телескоп">
           </button>
-        
-          <button class="thumb-btn rounded-xl flex-shrink-0 w-20 h-20 md:w-24 md:h-24 overflow-hidden" onclick="changeImage(this, '/assets/images/2shirt1.png')">
-            <img src="/assets/images/2shirt1.png" class="w-full h-full object-cover">
+          <button class="thumb-btn rounded-xl flex-shrink-0 w-20 h-20 md:w-24 md:h-24 overflow-hidden" onclick="changeImage(this, '/assets/images/albaspaceshop_63a7af6cb53246f74ca2792ad06c6410.png')">
+            <img src="/assets/images/albaspaceshop_63a7af6cb53246f74ca2792ad06c6410.png" class="w-full h-full object-cover" alt="Билет на наблюдение полнолуния через телескоп - Альтернативное изображение">
           </button>
-          <button class="thumb-btn rounded-xl flex-shrink-0 w-20 h-20 md:w-24 md:h-24 overflow-hidden" onclick="changeImage(this, '/assets/images/2shirt2.png')">
-            <img src="/assets/images/2shirt2.png" class="w-full h-full object-cover">
-          </button>
-          <button class="thumb-btn rounded-xl flex-shrink-0 w-20 h-20 md:w-24 md:h-24 overflow-hidden" onclick="changeImage(this, '/assets/images/2shirt3.png')">
-            <img src="/assets/images/2shirt3.png" class="w-full h-full object-cover">
-          </button></div>
+        </div>
       </div>
 
-      <!--   -->
       <div class="reveal" style="transition-delay: 0.1s;">
-        <nav class="text-xs uppercase tracking-widest text-gray-500 mb-4">Products / Clothing / T-Shirt</nav>
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight uppercase">T-Shirt</h1>
-        <div class="text-3xl font-light text-white mb-8">630.00 TL</div>
+        <nav class="text-xs uppercase tracking-widest text-gray-500 mb-4">Товары / Мероприятия / Билет на наблюдение полнолуния</nav>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight uppercase">Билет на наблюдение полнолуния через телескоп</h1>
+        <div class="text-3xl font-light text-white mb-8">400.00 TL</div>
         
         <div class="glass-card p-6 rounded-3xl mb-8">
-          <h3 class="text-sm font-semibold uppercase text-gray-400 mb-4">Ozellikler</h3>
+          <h3 class="text-sm font-semibold uppercase text-gray-400 mb-4">Описание товара</h3>
           <ul class="space-y-3 text-gray-300">
             <li class="flex items-center gap-3">
               <span class="w-1.5 h-1.5 rounded-full" style="background:var(--accent)"></span>
-              High quality cotton
+              Цифровой билет на просмотр полнолуния через телескоп
             </li>
             <li class="flex items-center gap-3">
               <span class="w-1.5 h-1.5 rounded-full" style="background:var(--accent)"></span>
-              Comfortable and breathable
+              Живое наблюдение с телескопом
             </li>
             <li class="flex items-center gap-3">
               <span class="w-1.5 h-1.5 rounded-full" style="background:var(--accent)"></span>
-               print
+              Билет отправляется на электронную почту после покупки
             </li>
             <li class="flex items-center gap-3">
               <span class="w-1.5 h-1.5 rounded-full" style="background:var(--accent)"></span>
-              Various sizes
+              Продолжительность сеанса: около 60 минут
             </li>
           </ul>
         </div>
 
-        
-        <!-- Payment Icons -->
+        <div class="glass-card p-6 rounded-3xl mb-8">
+          <h3 class="text-sm font-semibold uppercase text-gray-400 mb-4">Информация о доставке</h3>
+          <p class="text-gray-300 leading-relaxed">Цифровой билет отправляется на ваш e-mail сразу после оформления заказа и доступен для скачивания в PDF.</p>
+        </div>
+
         <div class="flex flex-wrap items-center gap-6 payment-icons mb-6">
           <img src="/assets/icons/mastercard.png" alt="mastercard">
           <img src="/assets/icons/visa.png" alt="visa">
-        </div><div class="flex flex-col sm:flex-row gap-4 mb-8">
-          <!--   -->
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 mb-8">
           <div class="flex items-center bg-gray-900 border border-gray-800 rounded-2xl p-1 h-14" data-qty>
             <button class="w-12 h-full flex items-center justify-center text-xl hover:text-white transition" onclick="updateQty(-1)">&minus;</button>
             <input type="number" id="qtyInput" value="1" min="1" class="qty-input w-12 bg-transparent text-center font-semibold outline-none text-white" data-qty-input>
             <button class="w-12 h-full flex items-center justify-center text-xl hover:text-white transition" onclick="updateQty(1)">&plus;</button>
           </div>
           
-          <!--     -->
           <button id="addToCartBtn" 
             class="btn-glow flex-1 h-14 rounded-2xl text-black font-bold uppercase tracking-wider transition-all"
-            data-product-id="shirt1"
-            data-product-name="T-Shirt"
-            data-product-price="630"
-            data-product-image="/assets/images/shirt1.png"
-            data-add-label="ADD TO CART"
-            data-added-label="ADDED!">
-            ADD TO CART
+            data-product-id="teleskopla-dolunay"
+            data-product-name="Билет на наблюдение полнолуния через телескоп"
+            data-product-price="400"
+            data-product-image="/assets/images/albaspaceshop_eb477f8cc10d14b917f64623a461cf38.png"
+            data-add-label="Добавить в корзину"
+            data-added-label="Добавлено!">
+            Добавить в корзину
           </button>
-          <a href="https://www.shopier.com/albaspaceshop/46492707" target="_blank" rel="noopener noreferrer"
+          <a href="https://www.shopier.com/albaspaceshop/46494291" target="_blank" rel="noopener noreferrer"
             class="btn-glow flex-1 h-14 rounded-2xl text-black font-bold uppercase tracking-wider transition-all inline-flex items-center justify-center">
-            BUY NOW
+            Купить сейчас
           </a>
         </div>
-
-        <!--   -->
       </div>
     </div>
 
-    <!--   -->
     <section class="mt-24 reveal">
       <div class="flex justify-between items-end mb-10">
         <div>
-          <h2 class="text-3xl font-bold uppercase tracking-tight">Bunlar? da begenebilirsiniz</h2>
+          <h2 class="text-3xl font-bold uppercase tracking-tight">Вам также может понравиться</h2>
           <div class="h-1 w-20 bg-blue-500 mt-2 rounded-full"></div>
         </div>
       </div>
@@ -273,18 +235,15 @@
     </section>
   </main>
 
-  <!--    -->
-  <div data-include="/footer-en-black"></div>
+  <div data-include="/footer-ru-black"></div>
 
   <script>
-    //  
     function changeImage(el, src) {
       document.getElementById('mainImage').src = src;
       document.querySelectorAll('.thumb-btn').forEach(btn => btn.classList.remove('active'));
       el.classList.add('active');
     }
 
-    //  
     function updateQty(delta) {
       const input = document.getElementById('qtyInput');
       let val = parseInt(input.value) + delta;
@@ -292,7 +251,6 @@
       input.value = val;
     }
 
-    //   
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -303,13 +261,10 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    //   (   cart.js)
     const cartBtn = document.getElementById('addToCartBtn');
     cartBtn.addEventListener('click', () => {
       const input = document.getElementById('qtyInput');
       const qty = parseInt(input.value || '1', 10);
-      
-      // ,        cart.js
       if (typeof cartManager !== 'undefined') {
           cartManager.addItem({
             id: cartBtn.dataset.productId,
@@ -320,15 +275,13 @@
             qty
           });
       } else {
-        console.warn('cartManager  .   /assets/js/cart.js');
+        console.warn('cartManager не найден. Проверьте подключение /assets/js/cart.js');
       }
 
-      //   
       const originalText = cartBtn.innerHTML;
-      cartBtn.innerHTML = cartBtn.dataset.addedLabel || 'EKLENDI!';
+      cartBtn.innerHTML = cartBtn.dataset.addedLabel || 'Добавлено!';
       cartBtn.style.background = '#22c55e';
       cartBtn.disabled = true;
-      
       setTimeout(() => {
         cartBtn.innerHTML = originalText;
         cartBtn.style.background = '';

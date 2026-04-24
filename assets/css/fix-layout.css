@@ -252,7 +252,7 @@
         .header-inner .main-nav .dropdown > .dropdown-trigger[href$="hizmetler.html"] + .dropdown-menu {
             left: auto !important;
             right: -25px !important;
-            top: 50% !important;
+            top: 100% !important;
             transform: none !important;
             display: flex !important;
             flex-direction: row-reverse !important;
@@ -271,7 +271,7 @@
         .header-inner .main-nav .dropdown > .dropdown-trigger[href$="hakkimizda.html"] + .dropdown-menu {
             left: -25px !important;
             right: auto !important;
-            top: 50% !important;
+            top: 100% !important;
             transform: none !important;
             display: flex !important;
             flex-direction: row !important;
@@ -511,7 +511,7 @@
 
     .header-inner .main-nav .dropdown-menu {
         position: fixed !important;
-        top: 50% !important;
+        top: 120px !important;
         left: 50% !important;
         right: auto !important;
         transform: translateX(-50%) translateY(100%) scaleY(0.95) !important;
