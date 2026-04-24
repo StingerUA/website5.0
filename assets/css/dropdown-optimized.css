@@ -99,7 +99,7 @@
   .main-nav .dropdown > .dropdown-trigger[href$="hizmetler.html"] + .dropdown-menu {
     left: auto;
     right: -25px;
-    top: 100%;
+    top: calc(100% + 10%);
     transform: none;
     transform-origin: top right;
     min-width: auto;
@@ -134,7 +134,7 @@
   .main-nav .dropdown > .dropdown-trigger[href$="hakkimizda.html"] + .dropdown-menu {
     left: -25px;
     right: auto;
-    top: 100%;
+    top: calc(100% + 10%);
     transform: none;
     transform-origin: top left;
     min-width: auto;

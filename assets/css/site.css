@@ -2328,18 +2328,18 @@ body.alba-dark-gradient {
    CONTENT SPACING BELOW HEADER
    ========================= */
 
-/* Add spacing below header equal to dropdown menu height for all pages */
+/* Add minimal spacing below header sufficient for dropdown menus */
 /* Apply to main content containers that don't have their own spacing */
 main:not(.home-main),
 .page,
 .shop-container,
 .cart-page {
-  margin-top: 140px !important; /* Height of dropdown menus + some padding */
+  margin-top: 120px !important; /* Minimal header + dropdown space */
 }
 
-/* Special case for home page - add extra spacing to account for dropdown height */
+/* Home page content should also start directly below header/dropdown area */
 .home-main {
-  margin-top: 260px !important; /* Original 120px + 140px for dropdown space */
+  margin-top: 120px !important; /* Minimal spacing for home page */
 }
 
 /* Reduce spacing on mobile */
@@ -2352,7 +2352,7 @@ main:not(.home-main),
   }
 
   .home-main {
-    margin-top: 120px !important; /* Reduced from 220px - only original spacing */
+    margin-top: 90px !important; /* Minimal mobile spacing for home page */
   }
 }
 
