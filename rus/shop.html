@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru" class="product-text-black">
 <head>
-  <!-- Универсальный favicon-блок -->
-  <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/icons/AlbaLogo.png" sizes="180x180">
   <link rel="manifest" href="/manifest.json">
@@ -11,13 +10,53 @@
   <meta name="msapplication-TileImage" content="/favicon.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Мвгвзин – Alba Space</title>
+
+  <!-- SEO + Open Graph -->
+  <title>Магазин — Alba Space</title>
+  <meta name="description" content="Официальный магазин Alba Space — одежда, аксессуары и уникальные впечатления с космической тематикой.">
+  <meta property="og:title" content="Магазин — Alba Space">
+  <meta property="og:description" content="Официальный магазин Alba Space — одежда, аксессуары и уникальные впечатления с космической тематикой.">
+  <meta property="og:image" content="/assets/images/og-preview.jpg">
+  <meta property="og:url" content="https://albaspace.com.tr/rus/shop.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/fix-layout.css">
   <link rel="stylesheet" href="/assets/css/shop.css">
   <link rel="stylesheet" href="/assets/css/product-overrides.css">
-  
-  <style> :root { --header-bg: #020617; --accent: #00c2ff; --page-bg: #020617; --text-main: #e5e7eb; --text-muted: #9ca3af; } /* СТРАХОВКА: Гарантируем, что элементы видимы, непрозрачны и без размытия */ .reveal, .product-card, .product-card img, .product-badge { opacity: 1 !important; transform: none !important; visibility: visible !important; filter: none !important; } </style>
+
+  <style>
+    :root {
+      --header-bg: #020617;
+      --accent: #00c2ff;
+      --page-bg: #020617;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+    }
+    .reveal, .product-card, .product-card img, .product-badge {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+      filter: none !important;
+    }
+    .product-price del {
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-right: 4px;
+    }
+    .discount-label {
+      display: inline-block;
+      background: rgba(0, 194, 255, 0.15);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-right: 4px;
+      letter-spacing: 0.03em;
+    }
+  </style>
 
   <script src="/assets/js/include.js" defer></script>
   <script src="/assets/js/menu-toggle.js" defer></script>
@@ -28,139 +67,129 @@
   <div data-include="/header-tr-black"></div>
 
   <main class="shop-container">
-    <h1 style="text-align:center;margin-bottom:8px;color:var(--text-main);">Магазин</h1>
+    <h1 style="text-align:center; margin-bottom:8px; color:var(--text-main);">Магазин</h1>
     <div class="product-list">
+
       <a href="product-hoodie1.html" class="product-card">
         <div class="product-badge" aria-hidden="true"></div>
-        <img src="/assets/images/hoodie11.png" alt="Hoodie" loading="lazy">
+        <img src="/assets/images/hoodie11.png" alt="Худи Alba Space" loading="lazy">
         <div class="product-info">
           <div class="payment-icons" aria-hidden="true">
-            <span class="payment-icons-link" role="link" tabindex="0" onclick="event.stopPropagation(); location.href='/cart.html';" onkeydown="if(event.key==='Enter'){event.stopPropagation(); location.href='/cart.html';}"></span>
-            <img src="/assets/icons/mastercard.png" alt="mastercard">
-            <img src="/assets/icons/visa.png" alt="visa">
+            <img src="/assets/icons/mastercard.png" alt="Mastercard">
+            <img src="/assets/icons/visa.png" alt="Visa">
           </div>
-          <h3>Hoodie</h3>
-          <div class="product-price"><del>1400.00 TL</del> İNDİRİM %30 980.00 TL</div>
-        </div>
-      </a>
-      <a href="product-hoodie.html" class="product-card">
-        <div class="product-badge" aria-hidden="true"></div>
-        <img src="/assets/images/hoodie.png" alt="Hoodie" loading="lazy">
-        <div class="product-info">
-          <div class="payment-icons" aria-hidden="true">
-            <span class="payment-icons-link" role="link" tabindex="0" onclick="event.stopPropagation(); location.href='/cart.html';" onkeydown="if(event.key==='Enter'){event.stopPropagation(); location.href='/cart.html';}"></span>
-            <img src="/assets/icons/mastercard.png" alt="mastercard">
-            <img src="/assets/icons/visa.png" alt="visa">
-          </div>
-          <h3>Hoodie</h3>
-          <div class="product-price"><del>1400.00 TL</del> İNDİRİM 30% 980.00 TL</div>
-        </div>
-      </a>
-      <a href="product-hat.html" class="product-card">
-        <div class="product-badge" aria-hidden="true"></div>
-        <img src="/assets/images/hat.png" alt="Katlaç/Sonsuz Küp" loading="lazy">
-        <div class="product-info">
-          <div class="payment-icons" aria-hidden="true">
-            <span class="payment-icons-link" role="link" tabindex="0" onclick="event.stopPropagation(); location.href='/cart.html';" onkeydown="if(event.key==='Enter'){event.stopPropagation(); location.href='/cart.html';}"></span>
-            <img src="/assets/icons/mastercard.png" alt="mastercard">
-            <img src="/assets/icons/visa.png" alt="visa">
-          </div>
-          <h3>Katlaç/Sonsuz Küp</h3>
-          <div class="product-price"><del>155.00 TL</del> İNDİRİM %30 120.00 TL</div>
+          <h3>Худи</h3>
+          <div class="product-price"><del>1 400,00 ₺</del> <span class="discount-label">−30%</span> 980,00 ₺</div>
         </div>
       </a>
 
+      <a href="product-hoodie.html" class="product-card">
+        <div class="product-badge" aria-hidden="true"></div>
+        <img src="/assets/images/hoodie.png" alt="Худи Alba Space" loading="lazy">
+        <div class="product-info">
+          <div class="payment-icons" aria-hidden="true">
+            <img src="/assets/icons/mastercard.png" alt="Mastercard">
+            <img src="/assets/icons/visa.png" alt="Visa">
+          </div>
+          <h3>Худи</h3>
+          <div class="product-price"><del>1 400,00 ₺</del> <span class="discount-label">−30%</span> 980,00 ₺</div>
+        </div>
+      </a>
+
+      <a href="product-hat.html" class="product-card">
+        <div class="product-badge" aria-hidden="true"></div>
+        <img src="/assets/images/hat.png" alt="Кепка Alba Space" loading="lazy">
+        <div class="product-info">
+          <div class="payment-icons" aria-hidden="true">
+            <img src="/assets/icons/mastercard.png" alt="Mastercard">
+            <img src="/assets/icons/visa.png" alt="Visa">
+          </div>
+          <h3>Кепка</h3>
+          <div class="product-price"><del>155,00 ₺</del> <span class="discount-label">−30%</span> 120,00 ₺</div>
+        </div>
+      </a>
 
       <a href="product-stanley.html" class="product-card">
         <div class="product-badge" aria-hidden="true"></div>
-        <img src="/assets/images/stanley.png" alt="Stanley Termos" loading="lazy">
+        <img src="/assets/images/stanley.png" alt="Термос Stanley" loading="lazy">
         <div class="product-info">
           <div class="payment-icons" aria-hidden="true">
-            <span class="payment-icons-link" role="link" tabindex="0" onclick="event.stopPropagation(); location.href='/cart.html';" onkeydown="if(event.key==='Enter'){event.stopPropagation(); location.href='/cart.html';}"></span>
-            <img src="/assets/icons/mastercard.png" alt="mastercard">
-            <img src="/assets/icons/visa.png" alt="visa">
+            <img src="/assets/icons/mastercard.png" alt="Mastercard">
+            <img src="/assets/icons/visa.png" alt="Visa">
           </div>
-          <h3>Stanley Termos</h3>
-          <div class="product-price"><del>3120.00 TL</del> İNDİRİM %30 2400.00 TL</div>
+          <h3>Термос Stanley</h3>
+          <div class="product-price"><del>3 120,00 ₺</del> <span class="discount-label">−30%</span> 2 400,00 ₺</div>
         </div>
       </a>
 
       <a href="product-teleskopla-dolunay.html" class="product-card">
         <div class="product-badge" aria-hidden="true"></div>
-        <img src="/assets/images/albaspaceshop_eb477f8cc10d14b917f64623a461cf38.png" alt="Билет на наблюдение полнолуния" loading="lazy">
+        <img src="/assets/images/albaspaceshop_eb477f8cc10d14b917f64623a461cf38.png" alt="Билет — наблюдение полнолуния в телескоп" loading="lazy">
         <div class="product-info">
           <div class="payment-icons" aria-hidden="true">
-            <span class="payment-icons-link" role="link" tabindex="0" onclick="event.stopPropagation(); location.href='/cart.html';" onkeydown="if(event.key==='Enter'){event.stopPropagation(); location.href='/cart.html';}"></span>
-            <img src="/assets/icons/mastercard.png" alt="mastercard">
-            <img src="/assets/icons/visa.png" alt="visa">
+            <img src="/assets/icons/mastercard.png" alt="Mastercard">
+            <img src="/assets/icons/visa.png" alt="Visa">
           </div>
-          <h3>Билет на наблюдение полнолуния</h3>
-          <div class="product-price">400.00 TL</div>
+          <h3>Наблюдение полнолуния в телескоп</h3>
+          <div class="product-price">400,00 ₺</div>
         </div>
       </a>
 
       <a href="product-shirt.html" class="product-card">
         <div class="product-badge" aria-hidden="true"></div>
-        <img src="/assets/images/shirt.png" alt="T-Shirt" loading="lazy">
+        <img src="/assets/images/shirt.png" alt="Футболка Alba Space" loading="lazy">
         <div class="product-info">
           <div class="payment-icons" aria-hidden="true">
-            <span class="payment-icons-link" role="link" tabindex="0" onclick="event.stopPropagation(); location.href='/cart.html';" onkeydown="if(event.key==='Enter'){event.stopPropagation(); location.href='/cart.html';}"></span>
-            <img src="/assets/icons/mastercard.png" alt="mastercard">
-            <img src="/assets/icons/visa.png" alt="visa">
+            <img src="/assets/icons/mastercard.png" alt="Mastercard">
+            <img src="/assets/icons/visa.png" alt="Visa">
           </div>
-          <h3>T-Shirt</h3>
-          <div class="product-price"><del>900.00 TL</del> İNDİRİM 30% 630.00 TL</div>
+          <h3>Футболка</h3>
+          <div class="product-price"><del>900,00 ₺</del> <span class="discount-label">−30%</span> 630,00 ₺</div>
         </div>
       </a>
 
       <a href="product-shirt1.html" class="product-card">
         <div class="product-badge" aria-hidden="true"></div>
-        <img src="/assets/images/shirt11.png" alt="T-Shirt" loading="lazy">
+        <img src="/assets/images/shirt11.png" alt="Футболка Alba Space" loading="lazy">
         <div class="product-info">
           <div class="payment-icons" aria-hidden="true">
-            <span class="payment-icons-link" role="link" tabindex="0" onclick="event.stopPropagation(); location.href='/cart.html';" onkeydown="if(event.key==='Enter'){event.stopPropagation(); location.href='/cart.html';}"></span>
-            <img src="/assets/icons/mastercard.png" alt="mastercard">
-            <img src="/assets/icons/visa.png" alt="visa">
+            <img src="/assets/icons/mastercard.png" alt="Mastercard">
+            <img src="/assets/icons/visa.png" alt="Visa">
           </div>
-          <h3>T-Shirt</h3>
-          <div class="product-price"><del>900.00 TL</del> İNDİRİM 30% 630.00 TL</div>
+          <h3>Футболка</h3>
+          <div class="product-price"><del>900,00 ₺</del> <span class="discount-label">−30%</span> 630,00 ₺</div>
         </div>
       </a>
 
-
       <a href="product-albamenvelara.html" class="product-card">
         <div class="product-badge" aria-hidden="true"></div>
-        <img src="/assets/images/albamenvelara.jpg" alt="Kitap" loading="lazy">
+        <img src="/assets/images/albamenvelara.jpg" alt="Книга «Альбамен Велара» — печатное издание" loading="lazy">
         <div class="product-info">
           <div class="payment-icons" aria-hidden="true">
-            <span class="payment-icons-link" role="link" tabindex="0" onclick="event.stopPropagation(); location.href='/cart.html';" onkeydown="if(event.key==='Enter'){event.stopPropagation(); location.href='/cart.html';}"></span>
-            <img src="/assets/icons/mastercard.png" alt="mastercard">
-            <img src="/assets/icons/visa.png" alt="visa">
+            <img src="/assets/icons/mastercard.png" alt="Mastercard">
+            <img src="/assets/icons/visa.png" alt="Visa">
           </div>
-          <h3>Kitap</h3>
-          <div class="product-price"><del>1500.00 TL</del> İNDİRİM 30% 1000.00 TL</div>
+          <h3>Книга «Альбамен Велара»</h3>
+          <div class="product-price"><del>1 500,00 ₺</del> <span class="discount-label">−30%</span> 1 000,00 ₺</div>
         </div>
       </a>
 
       <a href="product-albamenvelara1.html" class="product-card">
         <div class="product-badge" aria-hidden="true"></div>
-        <img src="/assets/images/albamenvelara1.png" alt="Kitap PDF" loading="lazy">
+        <img src="/assets/images/albamenvelara1.png" alt="Книга «Альбамен Велара» — PDF" loading="lazy">
         <div class="product-info">
           <div class="payment-icons" aria-hidden="true">
-            <span class="payment-icons-link" role="link" tabindex="0" onclick="event.stopPropagation(); location.href='/cart.html';" onkeydown="if(event.key==='Enter'){event.stopPropagation(); location.href='/cart.html';}"></span>
-            <img src="/assets/icons/mastercard.png" alt="mastercard">
-            <img src="/assets/icons/visa.png" alt="visa">
+            <img src="/assets/icons/mastercard.png" alt="Mastercard">
+            <img src="/assets/icons/visa.png" alt="Visa">
           </div>
-          <h3>Kitap PDF</h3>
-          <div class="product-price"><del>400.00 TL</del> İNDİRİM 60% 160.00 TL</div>
+          <h3>Книга «Альбамен Велара» PDF</h3>
+          <div class="product-price"><del>400,00 ₺</del> <span class="discount-label">−60%</span> 160,00 ₺</div>
         </div>
       </a>
-
 
     </div>
   </main>
 
   <div data-include="/footer-tr-black"></div>
-
 </body>
 </html>

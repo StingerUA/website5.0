@@ -58,7 +58,7 @@
     div.innerHTML = `
       <div class="loader-card">
         <div class="loading-logo">
-          <img src="/assets/images/albaspace-logo.png" alt="Alba Space Logo" />
+          <img src="/icns/albaspace-logo123.png" alt="Alba Space Logo" />
           <span>${t.logoText}</span>
         </div>
 
