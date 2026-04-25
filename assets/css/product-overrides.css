@@ -53,6 +53,14 @@ main * {
 .payment-icons img {
   filter: none !important;
   opacity: 1 !important;
+  height: 24px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.payment-icons img:hover {
+  opacity: 1 !important;
 }
 
 /* Override utility text classes used in templates */
