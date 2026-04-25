@@ -13,18 +13,15 @@
 const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID'; // <--- REPLACE THIS
 
 function handleCredentialResponse(response) {
-    console.log("Encoded JWT ID token: " + response.credential);
-    
-    // Decode the JWT to get user info (optional, for client-side display)
+    // Decode the JWT to get user info for UI-only display
     const payload = JSON.parse(atob(response.credential.split('.')[1]));
-    console.log("User Info:", payload);
 
-    // Save user info to localStorage
+    // Store only non-sensitive user info in localStorage.
+    // The raw ID token must not be persisted in browser storage.
     localStorage.setItem('user', JSON.stringify({
         name: payload.name,
         email: payload.email,
-        picture: payload.picture,
-        token: response.credential
+        picture: payload.picture
     }));
 
     // Redirect to profile page or refresh

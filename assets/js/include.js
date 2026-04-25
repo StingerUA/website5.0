@@ -48,6 +48,62 @@ runAfterDomReady(() => {
       /* silently ignore DOM issues */
     }
   })();
+
+  (function injectOpenGraphMetaTags() {
+    try {
+      const head = document.head;
+      if (!head) return;
+
+      const hasOgTitle = !!document.querySelector('meta[property="og:title"]');
+      const hasOgDesc = !!document.querySelector('meta[property="og:description"]');
+      const hasOgImage = !!document.querySelector('meta[property="og:image"]');
+      const hasOgUrl = !!document.querySelector('meta[property="og:url"]');
+      const hasTwitterCard = !!document.querySelector('meta[name="twitter:card"]');
+
+      const pageTitle = document.title || 'Alba Space';
+      const metaDescription = document.querySelector('meta[name="description"]')?.getAttribute('content') || 'ALBA Space — kosmos, tehnologiia i opyt dlia vsekh.';
+      const pageUrl = window.location.href;
+      const imageUrl = '/assets/images/og-preview.jpg';
+
+      if (!hasOgTitle) {
+        const meta = document.createElement('meta');
+        meta.setAttribute('property', 'og:title');
+        meta.setAttribute('content', pageTitle);
+        head.appendChild(meta);
+      }
+
+      if (!hasOgDesc) {
+        const meta = document.createElement('meta');
+        meta.setAttribute('property', 'og:description');
+        meta.setAttribute('content', metaDescription);
+        head.appendChild(meta);
+      }
+
+      if (!hasOgImage) {
+        const meta = document.createElement('meta');
+        meta.setAttribute('property', 'og:image');
+        meta.setAttribute('content', imageUrl);
+        head.appendChild(meta);
+      }
+
+      if (!hasOgUrl) {
+        const meta = document.createElement('meta');
+        meta.setAttribute('property', 'og:url');
+        meta.setAttribute('content', pageUrl);
+        head.appendChild(meta);
+      }
+
+      if (!hasTwitterCard) {
+        const meta = document.createElement('meta');
+        meta.setAttribute('name', 'twitter:card');
+        meta.setAttribute('content', 'summary_large_image');
+        head.appendChild(meta);
+      }
+    } catch (e) {
+      /* silently ignore metadata injection issues */
+    }
+  })();
+
   // 3. Загружаем CSS и скрипт для model-viewer
   injectModelViewerStyles();
   ensureModelViewerLoaded();
@@ -336,7 +392,7 @@ runAfterDomReady(() => {
           <input type="text" class="ai-input" id="ai-input-field-legacy" placeholder="${strings.placeholder}">
           <button class="ai-action-btn ai-send-btn-panel" id="ai-send-btn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="22" y1="2" x2="11" y="13"></line>
+              <line x1="22" y1="2" x2="11" y2="13"></line>
               <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
             </svg>
           </button>
@@ -1794,7 +1850,7 @@ function injectUnifiedAiWidget() {
   }
 
   sendBtn.addEventListener('click', sendMessage);
-  inputField.addEventListener('keypress', (e) => {
+  inputField.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage();

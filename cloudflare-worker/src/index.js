@@ -12,7 +12,7 @@ export default {
       console.error("Worker error:", error);
 
       return json(
-        { error: "Internal Server Error", details: error.message },
+        { error: "Internal Server Error" },
         500,
         buildCorsHeaders(request, env)
       );
