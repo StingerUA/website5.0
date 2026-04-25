@@ -171,7 +171,7 @@
     left: 50% !important;
     right: auto !important;
     transform: translateX(-50%) !important;
-    top: 100% !important;
+    top: calc(100% + 10%) !important;
     min-width: auto !important;
     width: auto !important;
     display: flex !important;
@@ -194,13 +194,11 @@
 
   .main-nav .dropdown > .dropdown-trigger[href$="albamen.html"] + .dropdown-menu a,
   .main-nav .dropdown > .dropdown-trigger[href$="albamen.html"] + .dropdown-menu button {
-    width: auto;
+    width: auto !important;
     white-space: nowrap;
     display: inline-flex;
-    padding: 8px 12px;
-    font-size: 13px;
+    padding: 10px 14px;
     pointer-events: auto !important;
-    z-index: 10050 !important;
   }
 
   /* Ensure header dropdown items are clickable */
