@@ -1,292 +1,158 @@
-// =========================
-// 🔧 РУЧНОЙ ДОСТУП (временно)
-// email -> список slug'ов
-// =========================
-const MANUAL_ACCESS = {
-  "hedonist.boutique.kiev@gmail.com": ["atlas-mars", "atlas-venus", "iss"],
-};
+<header class="site-header" role="banner">
+  <div class="header-inner">
 
-// домен твоего фронта (GitHub Pages). Поменяй на свой.
-const FRONT_ORIGIN = "https://stingerua.github.io"; 
+    <!-- Left: logo icon + AI assistant + account -->
+    <div class="logo-sub-icons">
+      <a href="/index.html" class="header-logo-icon" aria-label="Alba Space ana sayfa">
+        <img src="/assets/images/albalogo.png" alt="Alba Space logo" width="32" height="32">
+      </a>
+      <a href="#" class="ai-widget-toggle" aria-label="AI assistant" title="AI">
+        <img src="/assets/images/albamenai.png" alt="AI assistant" width="32" height="32">
+      </a>
+      <div class="alien-dropdown-container">
+        <a href="#"
+           class="alien-ghost"
+           aria-label="Hesap menüsü"
+           aria-controls="alienMenu"
+           aria-expanded="false"
+           aria-haspopup="true"
+           title="Giriş"
+           onclick="toggleAlienMenu(event)">
+          <img src="/assets/icons/alien.png" alt="Account" width="32" height="32">
+        </a>
+        <div id="alienMenu" class="alien-menu" role="menu" hidden>
+          <a href="#" class="alien-menu-item open-login" role="menuitem">Giriş Yap</a>
+          <button type="button"
+                  class="alien-menu-item alien-menu-google"
+                  onclick="login({ closeMenu: true, source: 'header-menu' })"
+                  aria-label="Google ile Giriş Yap"
+                  role="menuitem">Google ile Giriş Yap</button>
+          <a href="#" class="alien-menu-item open-signup" role="menuitem">Kayıt Ol</a>
+          <div id="user" class="worker-auth-user" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
 
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
+    <!-- Center: Alba Space wordmark logo -->
+    <a href="/index.html" class="header-logo main-center-logo" aria-label="Alba Space">
+      <img src="/assets/images/albaspace.png" alt="Alba Space" class="albaspace-img">
+    </a>
 
-    // --- CORS (важно для cookies) ---
-    const cors = {
-      "Access-Control-Allow-Origin": FRONT_ORIGIN,
-      "Access-Control-Allow-Credentials": "true",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Vary": "Origin"
-    };
+    <!-- Navigation -->
+    <nav class="main-nav" aria-label="Ana menü">
+      <div class="dropdown">
+        <a href="/hizmetler.html" class="dropdown-trigger" aria-expanded="false">HİZMETLER</a>
+        <div class="dropdown-menu">
+          <a href="/hizmetler.html">HİZMETLER</a>
+          <a href="https://albaspace.com.tr/hyperclub" target="_blank" rel="noopener">Hyper Club</a>
+        </div>
+      </div>
+      <a href="/shop.html">MAĞAZA</a>
+      <div class="dropdown">
+        <a href="/albamen.html" class="dropdown-trigger" aria-expanded="false">ALBAMEN</a>
+        <div class="dropdown-menu">
+          <a href="/albamen.html">ALBAMEN</a>
+          <a href="/atlas.html">ATLAS</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="/hakkimizda.html" class="dropdown-trigger" aria-expanded="false">HAKKIMIZDA</a>
+        <div class="dropdown-menu">
+          <a href="/hakkimizda.html">HAKKIMIZDA</a>
+          <a href="/basindabiz.html">BASINDA BİZ</a>
+          <a href="/galeri.html">GALERİ</a>
+          <a href="/iletisim.html">İLETİŞİM</a>
+        </div>
+      </div>
+    </nav>
 
-    if (request.method === "OPTIONS") {
-      return new Response(null, { headers: cors });
+    <!-- Right: social icons + language + cart -->
+    <div class="header-social">
+      <div class="social-row" aria-label="Sosyal medya">
+        <a href="https://www.instagram.com/albaspace_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-track="inst">
+          <img src="/assets/icons/inst.png" alt="Instagram" loading="lazy">
+        </a>
+        <a href="https://www.linkedin.com/in/idrisalbayrak/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <img src="/assets/icons/linkdin.png" alt="LinkedIn" loading="lazy">
+        </a>
+        <a href="https://wa.me/905387781018" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-track="whatsapp">
+          <img src="/assets/icons/watsupp.png" alt="WhatsApp" loading="lazy">
+        </a>
+        <a href="https://www.youtube.com/@AlbaSpaceTr" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <img src="/assets/icons/youtube.png" alt="YouTube" loading="lazy">
+        </a>
+      </div>
+
+      <!-- Language + cart -->
+      <div class="top-lang-switch">
+        <a href="/index.html"     data-lang="tr" class="lang-flag" aria-label="Türkçe">
+          <img src="/assets/icons/flag-tr.png"  alt="Türkçe"  width="24" height="16" loading="lazy">
+        </a>
+        <a href="/eng/index.html" data-lang="en" class="lang-flag" aria-label="English">
+          <img src="/assets/icons/flag-us.png"  alt="English" width="24" height="16" loading="lazy">
+        </a>
+        <a href="/rus/index.html" data-lang="ru" class="lang-flag" aria-label="Русский">
+          <img src="/assets/icons/flag-rus.png" alt="Русский" width="24" height="16" loading="lazy">
+        </a>
+
+        <a href="/cart.html" class="header-cart-link" aria-label="Sepet">
+          <span class="header-cart-icon" aria-hidden="true">
+            <img src="/assets/icons/chart.png" alt="" width="28" height="28">
+            <span class="header-cart-count" data-cart-count aria-label="Sepet sayısı">0</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<link rel="stylesheet" href="/assets/css/dropdown-optimized.css">
+<link rel="stylesheet" href="/assets/css/model-nav-overrides.css">
+<link rel="stylesheet" href="/assets/css/remove-blog-overlay.css">
+<link rel="stylesheet" href="/assets/css/fix-layout.css">
+<link rel="stylesheet" href="/assets/css/content-z-index-fix.css">
+<script src="/assets/js/menu-toggle.js" defer></script>
+<script src="/assets/js/cart.js" defer></script>
+<script src="/assets/js/lang-switch.js" defer></script>
+<script src="/assets/js/ai-widget.js" defer></script>
+<script src="/assets/js/model-nav-loader.js" defer></script>
+<script src="/assets/js/worker-auth.js" defer></script>
+<script src="/assets/js/mobile-header-cart.js" defer></script>
+<script>
+(function () {
+  function toggleAlienMenu(e) {
+    e.preventDefault();
+    const menu = document.getElementById('alienMenu');
+    const trigger = document.querySelector('.alien-ghost');
+    const isHidden = menu.hasAttribute('hidden');
+    if (isHidden) {
+      menu.removeAttribute('hidden');
+      trigger.setAttribute('aria-expanded', 'true');
+    } else {
+      menu.setAttribute('hidden', '');
+      trigger.setAttribute('aria-expanded', 'false');
     }
-
-    // =========================
-    // 🔐 GOOGLE LOGIN
-    // =========================
-    if (url.pathname === "/auth/google") {
-      const redirect_uri =
-        "https://albaspace-api.nncdecdgc.workers.dev/auth/google/callback";
-
-      const authUrl =
-        "https://accounts.google.com/o/oauth2/v2/auth" +
-        "?client_id=" + env.GOOGLE_CLIENT_ID +
-        "&redirect_uri=" + encodeURIComponent(redirect_uri) +
-        "&response_type=code" +
-        "&scope=openid email profile";
-
-      return Response.redirect(authUrl, 302);
-    }
-
-    // =========================
-    // 🔐 GOOGLE CALLBACK
-    // =========================
-    if (url.pathname === "/auth/google/callback") {
-      const code = url.searchParams.get("code");
-
-      const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          code,
-          client_id: env.GOOGLE_CLIENT_ID,
-          client_secret: env.GOOGLE_CLIENT_SECRET,
-          redirect_uri:
-            "https://albaspace-api.nncdecdgc.workers.dev/auth/google/callback",
-          grant_type: "authorization_code"
-        })
-      });
-
-      const tokenData = await tokenRes.json();
-
-      const userRes = await fetch(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
-        {
-          headers: { Authorization: `Bearer ${tokenData.access_token}` }
-        }
-      );
-
-      const user = await userRes.json();
-
-      // сохранить пользователя
-      await env.DB.prepare(
-        "INSERT OR REPLACE INTO users (google_id, email, name, avatar) VALUES (?, ?, ?, ?)"
-      )
-        .bind(user.sub, user.email, user.name, user.picture)
-        .run();
-
-      // ⚠️ важно для кросс-доменных cookies
-      const cookie = [
-        `user_id=${user.sub}`,
-        "Path=/",
-        "HttpOnly",
-        "Secure",
-        "SameSite=None", // иначе cookie не уйдёт с GitHub Pages
-        "Max-Age=2592000" // 30 дней
-      ].join("; ");
-
-      return new Response("Login success", {
-        headers: {
-          ...cors,
-          "Set-Cookie": cookie
-        }
-      });
-    }
-
-    // =========================
-    // 👤 ТЕКУЩИЙ ПОЛЬЗОВАТЕЛЬ
-    // =========================
-    if (url.pathname === "/me") {
-      const cookie = request.headers.get("Cookie") || "";
-      const match = cookie.match(/user_id=([^;]+)/);
-
-      if (!match) {
-        return new Response("Not logged in", { status: 401, headers: cors });
-      }
-
-      const userId = match[1];
-
-      const user = await env.DB.prepare(
-        "SELECT * FROM users WHERE google_id = ?"
-      )
-        .bind(userId)
-        .first();
-
-      return Response.json(user, { headers: cors });
-    }
-
-    // =========================
-    // 💳 WOO WEBHOOK (опционально)
-    // =========================
-    if (url.pathname === "/webhook/woo") {
-      const body = await request.text();
-      const data = JSON.parse(body);
-
-      const email = data.billing?.email;
-      if (!email) return new Response("No email", { status: 400 });
-
-      const user = await env.DB.prepare(
-        "SELECT * FROM users WHERE email = ?"
-      )
-        .bind(email)
-        .first();
-
-      if (!user) return new Response("User not found", { status: 404 });
-
-      for (const item of data.line_items) {
-        const slug = item.sku || item.name;
-
-        const product = await env.DB.prepare(
-          "SELECT * FROM products WHERE slug = ?"
-        )
-          .bind(slug)
-          .first();
-
-        if (!product) continue;
-
-        await env.DB.prepare(
-          "INSERT INTO purchases (user_id, product_id) VALUES (?, ?)"
-        )
-          .bind(user.id, product.id)
-          .run();
-      }
-
-      return new Response("OK", { headers: cors });
-    }
-
-    // =========================
-    // 🔓 ПРОВЕРКА ДОСТУПА
-    // =========================
-    if (url.pathname === "/product-access") {
-      const cookie = request.headers.get("Cookie") || "";
-      const match = cookie.match(/user_id=([^;]+)/);
-
-      if (!match) {
-        return Response.json({ access: "none" }, { headers: cors });
-      }
-
-      const googleId = match[1];
-      const slug = url.searchParams.get("slug");
-
-      const user = await env.DB.prepare(
-        "SELECT * FROM users WHERE google_id = ?"
-      )
-        .bind(googleId)
-        .first();
-
-      if (!user) return Response.json({ access: "none" }, { headers: cors });
-
-      let hasAccess = false;
-
-      // 1) через покупки
-      const product = await env.DB.prepare(
-        "SELECT * FROM products WHERE slug = ?"
-      )
-        .bind(slug)
-        .first();
-
-      if (product) {
-        const purchase = await env.DB.prepare(
-          "SELECT * FROM purchases WHERE user_id = ? AND product_id = ?"
-        )
-          .bind(user.id, product.id)
-          .first();
-
-        if (purchase) hasAccess = true;
-      }
-
-      // 2) ручной доступ
-      if (!hasAccess) {
-        const list = MANUAL_ACCESS[user.email] || [];
-        if (list.includes(slug)) hasAccess = true;
-      }
-
-      return Response.json(
-        { access: hasAccess ? "premium" : "preview" },
-        { headers: cors }
-      );
-    }
-
-    // =========================
-    // 🔐 ВЫДАЧА МОДЕЛИ (R2)
-    // =========================
-    if (url.pathname === "/model") {
-      const cookie = request.headers.get("Cookie") || "";
-      const match = cookie.match(/user_id=([^;]+)/);
-
-      if (!match) {
-        return new Response("Not logged in", { status: 401 });
-      }
-
-      const googleId = match[1];
-      const slug = url.searchParams.get("slug");
-      const lang = url.searchParams.get("lang") || "eng";
-
-      const user = await env.DB.prepare(
-        "SELECT * FROM users WHERE google_id = ?"
-      )
-        .bind(googleId)
-        .first();
-
-      if (!user) {
-        return new Response("User not found", { status: 404 });
-      }
-
-      let hasAccess = false;
-
-      // через покупки
-      const product = await env.DB.prepare(
-        "SELECT * FROM products WHERE slug = ?"
-      )
-        .bind(slug)
-        .first();
-
-      if (product) {
-        const purchase = await env.DB.prepare(
-          "SELECT * FROM purchases WHERE user_id = ? AND product_id = ?"
-        )
-          .bind(user.id, product.id)
-          .first();
-
-        if (purchase) hasAccess = true;
-      }
-
-      // ручной доступ
-      if (!hasAccess) {
-        const list = MANUAL_ACCESS[user.email] || [];
-        if (list.includes(slug)) hasAccess = true;
-      }
-
-      if (!hasAccess) {
-        return new Response("Access denied", { status: 403 });
-      }
-
-      // путь в R2
-      let path = `atlas/pro/${slug}.glb`;
-      if (lang === "eng") path = `atlas/pro/eng/${slug}.glb`;
-      if (lang === "rus") path = `atlas/pro/rus/${slug}.glb`;
-
-      const object = await env.MODELS.get(path);
-
-      if (!object) {
-        return new Response("Model not found", { status: 404 });
-      }
-
-      return new Response(object.body, {
-        headers: {
-          "Content-Type": "model/gltf-binary",
-          "Cache-Control": "private, max-age=0"
-        }
-      });
-    }
-
-    // =========================
-    // DEFAULT
-    // =========================
-    return new Response("API running", { headers: cors });
   }
-};
+
+  function closeAlienMenu() {
+    const menu = document.getElementById('alienMenu');
+    const trigger = document.querySelector('.alien-ghost');
+    if (menu) menu.setAttribute('hidden', '');
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+  }
+
+  document.addEventListener('click', function (e) {
+    const container = document.querySelector('.alien-dropdown-container');
+    if (container && !container.contains(e.target)) closeAlienMenu();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAlienMenu();
+  });
+
+  window.toggleAlienMenu = toggleAlienMenu;
+}());
+</script>
+
+<div data-include="/assets/includes/signup-modal.html"></div>
