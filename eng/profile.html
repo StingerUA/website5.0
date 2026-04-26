@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="tr">
+
+<html lang="en">
 <head>
-  <!-- Универсальный favicon-блок -->
-  <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/assets/icons/AlbaLogo.png" sizes="180x180">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#020617">
-  <meta name="msapplication-TileColor" content="#020617">
-  <meta name="msapplication-TileImage" content="/favicon.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Profil – Alba Space</title>
-  <link rel="stylesheet" href="/assets/css/site.css">
-  <link rel="stylesheet" href="/assets/css/fix-layout.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script src="/assets/js/include.js" defer></script>
-  <style>
+<!-- Универсальный favicon-блок -->
+<link href="/assets/icons/AlbaLogo.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/icons/AlbaLogo.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/icons/AlbaLogo.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/manifest.json" rel="manifest"/>
+<meta content="#020617" name="theme-color"/>
+<meta content="#020617" name="msapplication-TileColor"/>
+<meta content="/favicon.png" name="msapplication-TileImage"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Profile – Alba Space</title>
+<link href="/assets/css/site.css" rel="stylesheet"/>
+<link href="/assets/css/fix-layout.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<script defer="" src="/assets/js/include.js"></script>
+<style>
     :root {
       --page-bg: #020617;
       --accent: #00c2ff;
@@ -62,51 +63,44 @@
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
-  <div data-include="/header-tr.html"></div>
-
-  <main class="flex-grow flex items-center justify-center px-4 py-20">
-    <div class="glass-card w-full max-w-2xl p-8 rounded-3xl shadow-2xl">
-      <h1 class="text-3xl font-bold text-center mb-8 text-white">Profilini Tamamla</h1>
-      
-      <form class="space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-400 mb-2">Ad Soyad</label>
-            <input type="text" required class="input-field w-full px-4 py-3 rounded-xl" placeholder="Adınız Soyadınız">
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-400 mb-2">Yaş</label>
-            <input type="number" min="1" max="120" required class="input-field w-full px-4 py-3 rounded-xl" placeholder="Yaşınız">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-400 mb-2">Cinsiyet</label>
-            <select required class="select-field w-full px-4 py-3 rounded-xl">
-              <option value="" disabled selected>Seçiniz</option>
-              <option value="male">Erkek</option>
-              <option value="female">Kadın</option>
-              <option value="other">Diğer</option>
-            </select>
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-400 mb-2">Yaşadığınız Şehir</label>
-            <input type="text" required class="input-field w-full px-4 py-3 rounded-xl" placeholder="Şehir">
-          </div>
-        </div>
-
-        <div class="pt-6">
-          <button type="submit" class="btn-primary w-full py-4 rounded-xl text-lg font-bold uppercase tracking-wider">
-            Kaydet
+<div data-include="/header-en.html"></div>
+<main class="flex-grow flex items-center justify-center px-4 py-20">
+<div class="glass-card w-full max-w-2xl p-8 rounded-3xl shadow-2xl">
+<h1 class="text-3xl font-bold text-center mb-8 text-white">Complete Your Profile</h1>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-gray-400 mb-2">Full Name</label>
+<input class="input-field w-full px-4 py-3 rounded-xl" placeholder="Your Full Name" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-400 mb-2">Age</label>
+<input class="input-field w-full px-4 py-3 rounded-xl" max="120" min="1" placeholder="Your Age" required="" type="number"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-gray-400 mb-2">Gender</label>
+<select class="select-field w-full px-4 py-3 rounded-xl" required="">
+<option disabled="" selected="" value="">Select</option>
+<option value="male">Male</option>
+<option value="female">Female</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-400 mb-2">City</label>
+<input class="input-field w-full px-4 py-3 rounded-xl" placeholder="City" required="" type="text"/>
+</div>
+</div>
+<div class="pt-6">
+<button class="btn-primary w-full py-4 rounded-xl text-lg font-bold uppercase tracking-wider" type="submit">
+            Save
           </button>
-        </div>
-      </form>
-    </div>
-  </main>
-
-  <div data-include="/footer-tr.html"></div>
+</div>
+</form>
+</div>
+</main>
+<div data-include="/footer-en.html"></div>
 </body>
 </html>

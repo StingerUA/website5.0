@@ -293,15 +293,9 @@ select, select option {
 
   position: relative;
 
-  z-index: 4000;
+  z-index: 50;
 
   isolation: isolate;
-
-  overflow: visible;
-
-  position: relative;
-
-  z-index: 50;
 
   overflow: visible !important; /* Ensure dropdowns aren't clipped */
 
@@ -325,13 +319,9 @@ select, select option {
 
   position:relative;
 
-  z-index:1;
-
-  overflow: visible;
+  z-index: 50 !important; /* Maintain high z-index context */
 
   overflow: visible !important; /* Ensure dropdowns aren't clipped */
-
-  z-index: 50 !important; /* Maintain high z-index context */
 
 }
 
@@ -2142,6 +2132,7 @@ select, select option {
 /* ===== ALIEN DROPDOWN FIX ===== */
 .alien-dropdown-container {
     position: relative !important;
+    display: inline-block !important;
     z-index: 9999 !important;
 }
 

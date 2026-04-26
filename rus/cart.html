@@ -1,26 +1,23 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  <!-- Универсальный favicon-блок -->
-  <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/assets/icons/AlbaLogo.png" sizes="180x180">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#020617">
-  <meta name="msapplication-TileColor" content="#020617">
-  <meta name="msapplication-TileImage" content="/favicon.png">
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Корзина – AlbaSpace</title>
-  
-  <!-- Site genel stilleri -->
-  <link rel="stylesheet" href="/assets/css/site.css">
-  <link rel="stylesheet" href="/assets/css/shop.css">
-
-  <!-- İkinci sayfadan gelen özel stiller -->
-
-  <style>
+<!-- Универсальный favicon-блок -->
+<link href="/assets/icons/AlbaLogo.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/icons/AlbaLogo.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/icons/AlbaLogo.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/manifest.json" rel="manifest"/>
+<meta content="#020617" name="theme-color"/>
+<meta content="#020617" name="msapplication-TileColor"/>
+<meta content="/favicon.png" name="msapplication-TileImage"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Корзина – AlbaSpace</title>
+<!-- Site genel stilleri -->
+<link href="/assets/css/site.css" rel="stylesheet"/>
+<link href="/assets/css/shop.css" rel="stylesheet"/>
+<!-- İkinci sayfadan gelen özel stiller -->
+<style>
     :root { --header-bg: #020617; --accent: #00c2ff; --page-bg: #050b27; --text-main: #ffffff; --text-muted: #9ca3af; }
     .chart-payment-bar { display:flex; justify-content:center; margin-top: 20px; margin-bottom:18px; }
     .chart-payment-bar .payment-icons { position:relative; display: flex; gap:24px; justify-content:center; align-items:center; padding:6px 12px; border-radius:10px; z-index:3; }
@@ -29,93 +26,75 @@
     .whatsapp-btn { display: inline-block; margin-top: 10px; width: 100%; text-align: center; background-color: #25D366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; font-weight: bold; }
     .whatsapp-btn:hover { background-color: #128C7E; }
   </style>
-
-  <style>
+<style>
     /* Override default site stylesheet background and force white text for cart page */
     body{ background-color: var(--page-bg) !important; color: var(--text-main) !important; }
     html{ background-color: var(--page-bg) !important; }
   </style>
-
-  <!-- Scriptler -->
-  <script src="/assets/js/include.js" defer></script>
-  <script src="/assets/js/menu-toggle.js" defer></script>
-  <script src="/assets/js/cart.js" defer></script>
-  <link rel="stylesheet" href="/assets/css/cart-white.css">
+<!-- Scriptler -->
+<script defer="" src="/assets/js/include.js"></script>
+<script defer="" src="/assets/js/menu-toggle.js"></script>
+<script defer="" src="/assets/js/cart.js"></script>
+<link href="/assets/css/cart-white.css" rel="stylesheet"/>
 </head>
-
 <body>
-
-  <!-- Türkçe Header -->
-  <div data-include="/header-ru.html"></div>
-
-  <main class="cart-page">
-    <h1>Корзина</h1>
-
-    <!-- Sepet ürünleri konteyneri -->
-    <section id="cartItems"></section>
-
-    <!-- Sepet özeti ve kargo hesaplama -->
-    <section class="cart-summary" id="cartSummary">
-      <div class="cart-total-row">
-        <span>Итого:</span>
-        <span id="cartTotal">TL0.00</span>
-      </div>
-
-      <div class="shipping-estimate">
-        <h2>Расчетная стоимость доставки</h2>
-        <form>
-          <label>
-            Страна
+<!-- Türkçe Header -->
+<div data-include="/header-ru.html"></div>
+<main class="cart-page">
+<h1>Корзина</h1>
+<!-- Sepet ürünleri konteyneri -->
+<section id="cartItems"></section>
+<!-- Sepet özeti ve kargo hesaplama -->
+<section class="cart-summary" id="cartSummary">
+<div class="cart-total-row">
+<span>Итого:</span>
+<span id="cartTotal">0,00 TL</span>
+</div>
+<div class="shipping-estimate">
+<h2>Расчетная стоимость доставки</h2>
+<form>
+<label>
+            Сторона
             <select>
-              <option value="Türkiye">Турция</option>
-              <option value="United States">США</option>
-              <option value="United Kingdom">Великобритания</option>
-              <option value="Ukraine">Украина</option>
-              <option value="Russia">Россия</option>
-            </select>
-          </label>
-
-          <label>
+<option value="Türkiye">Турция</option>
+<option value="United States">США</option>
+<option value="United Kingdom">Великобритания</option>
+<option value="Ukraine">Украина</option>
+<option value="Russia">Россия</option>
+</select>
+</label>
+<label>
             Штат / Область
-            <input type="text" placeholder="Штат или Область">
-          </label>
-
-          <label>
+            <input placeholder="Штат или Область" type="text"/>
+</label>
+<label>
             Почтовый индекс
-            <input type="text" placeholder="Почтовый индекс">
-          </label>
-
-          <button type="button" class="btn-secondary">Рассчитать</button>
-        </form>
-      </div>
-
-      <!-- Standart Checkout Butonu -->
-      <button class="btn-primary checkout-btn" type="button">ОФОРМИТЬ ЗАКАЗ</button>
-      
-      <!-- WhatsApp ödemeye yönlendiren buton (dinamik mesaj oluşturulacak) -->
-      <a id="whatsappBtn" class="whatsapp-btn" href="#" rel="noopener">ОПЛАТИТЬ ЧЕРЕЗ WHATSAPP</a>
-
-      <!-- İkinci sayfadan gelen Ödeme İkonları -->
-      <div class="chart-payment-bar">
-        <div class="payment-icons" aria-hidden="true">
-          <!-- Link mantığı korundu -->
-          <span class="payment-icons-link" role="link" tabindex="0" onclick="location.href='/rus/cart.html';" onkeydown="if(event.key==='Enter'){location.href='/rus/cart.html';}"></span>
-          <img src="/assets/icons/iyzico_tr.png" alt="iyzico">
-          <img src="/assets/icons/mastercard.png" alt="mastercard">
-          <img src="/assets/icons/visa.png" alt="visa">
-        </div>
-      </div>
-
-    </section>
-
-    <!-- Sepet boş mesajı -->
-    <p id="emptyCartMessage" class="cart-empty" hidden>Ваша корзина пуста.</p>
-  </main>
-
-  <!-- Türkçe Footer -->
-  <div data-include="/footer-ru.html"></div>
-
-  <script>
+            <input placeholder="Почтовый индекс" type="text"/>
+</label>
+<button class="btn-secondary" type="button">Рассчитать</button>
+</form>
+</div>
+<!-- Standart Checkout Butonu -->
+<button class="btn-primary checkout-btn" type="button">ОФОРМИТЬ ЗАКАЗ</button>
+<!-- WhatsApp ödemeye yönlendiren buton (dinamik mesaj oluşturulacak) -->
+<a class="whatsapp-btn" href="#" id="whatsappBtn" rel="noopener">ОПЛАТИТЬ ЧЕРЕЗ WHATSAPP</a>
+<!-- İkinci sayfadan gelen Ödeme İkonları -->
+<div class="chart-payment-bar">
+<div aria-hidden="true" class="payment-icons">
+<!-- Link mantığı korundu -->
+<span class="payment-icons-link" onclick="location.href='/rus/cart.html';" onkeydown="if(event.key==='Enter'){location.href='/rus/cart.html';}" role="link" tabindex="0"></span>
+<img alt="ийзико" src="/assets/icons/iyzico_tr.png"/>
+<img alt="мастеркард" src="/assets/icons/mastercard.png"/>
+<img alt="виза" src="/assets/icons/visa.png"/>
+</div>
+</div>
+</section>
+<!-- Sepet boş mesajı -->
+<p class="cart-empty" hidden="" id="emptyCartMessage">Ваша корзина пуста.</p>
+</main>
+<!-- Türkçe Footer -->
+<div data-include="/footer-ru.html"></div>
+<script>
     /**
      * Sepet içeriğini Türkçe olarak render eden fonksiyon.
      */
@@ -196,8 +175,7 @@
 
     document.addEventListener('DOMContentLoaded', renderCartTR);
   </script>
-
-  <script>
+<script>
     // Oluşturulmuş sepete göre WhatsApp mesajı üreten ve açan fonksiyon (Türkçe)
     (function() {
       const phone = '905387781018';
@@ -233,8 +211,7 @@
       });
     })();
   </script>
-
-  <script>
+<script>
     const revealItems = document.querySelectorAll('.reveal');
 
     const observer = new IntersectionObserver((entries, obs) => {
@@ -255,8 +232,7 @@
       observer.observe(item);
     });
   </script>
-
-  <script>
+<script>
       // Sayfa Yüklendiğinde Popup Kontrolü
       document.addEventListener("DOMContentLoaded", function() {
           // localStorage kontrolü: Kullanıcı daha önce "kabul ettim" dedi mi?

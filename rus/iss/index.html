@@ -1,46 +1,32 @@
 <!DOCTYPE html>
-<html lang="tr">
+
+<html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Uluslararası Uzay İstasyonu – Alba Space</title>
-  <link rel="icon" type="image/png" href="/favicon.png" />
-
-  <!-- model-viewer -->
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.0/model-viewer.min.js" crossorigin="anonymous"></script>
-
-  <style> :root { --header-bg: #020617; --accent: #00c2ff; } * { box-sizing: border-box; margin: 0; padding: 0; } body { font-family: Arial, sans-serif; background-size: cover; color: #fff; opacity: 0; animation: fadeInBody 0.8s ease-out forwards; } @keyframes fadeInBody { to { opacity: 1; } } /* КОНТЕНТ СТРАНИЦЫ */ h1 { text-align: center; margin-top: 100px; margin-bottom: 15px; font-size: 32px; text-shadow: 0 0 15px #000; } .container { width: 90%; max-width: 1200px; margin: auto; padding-bottom: 50px; backdrop-filter: blur(2px); } p { text-align: center; font-size: 18px; text-shadow: 0 0 8px #000; max-width: 900px; margin: 20px auto; } /* ОБЁРТКА для model-viewer + прелоадера */ .viewer-wrapper{ position: relative; width: 100%; margin-top: 30px; border-radius: 12px; overflow: hidden; /* чтобы оверлей не вылезал за скругления */ box-shadow: 0 0 30px rgba(0, 150, 255, 0.5); } model-viewer { width: 100%; height: 600px; display: block; } @media (max-width: 768px) { h1 { font-size: 26px; margin-top: 90px; } model-viewer { height: 420px; } } </style>
-
-  <link rel="stylesheet" href="/assets/css/site.css" />
-  <script src="/assets/js/include.js" defer></script>
-  <script src="/assets/js/menu-toggle.js" defer></script>
-  <script src="/assets/js/model-viewer-debug.js" defer></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Международная космическая станция – Альба Спейс</title>
+<link href="/favicon.png" rel="icon" type="image/png"/>
+<!-- model-viewer -->
+<script crossorigin="anonymous" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.0/model-viewer.min.js" type="module"></script>
+<style> :root { --header-bg: #020617; --accent: #00c2ff; } * { box-sizing: border-box; margin: 0; padding: 0; } body { font-family: Arial, sans-serif; background-size: cover; color: #fff; opacity: 0; animation: fadeInBody 0.8s ease-out forwards; } @keyframes fadeInBody { to { opacity: 1; } } /* КОНТЕНТ СТРАНИЦЫ */ h1 { text-align: center; margin-top: 100px; margin-bottom: 15px; font-size: 32px; text-shadow: 0 0 15px #000; } .container { width: 90%; max-width: 1200px; margin: auto; padding-bottom: 50px; backdrop-filter: blur(2px); } p { text-align: center; font-size: 18px; text-shadow: 0 0 8px #000; max-width: 900px; margin: 20px auto; } /* ОБЁРТКА для model-viewer + прелоадера */ .viewer-wrapper{ position: relative; width: 100%; margin-top: 30px; border-radius: 12px; overflow: hidden; /* чтобы оверлей не вылезал за скругления */ box-shadow: 0 0 30px rgba(0, 150, 255, 0.5); } model-viewer { width: 100%; height: 600px; display: block; } @media (max-width: 768px) { h1 { font-size: 26px; margin-top: 90px; } model-viewer { height: 420px; } } </style>
+<link href="/assets/css/site.css" rel="stylesheet"/>
+<script defer="" src="/assets/js/include.js"></script>
+<script defer="" src="/assets/js/menu-toggle.js"></script>
+<script defer="" src="/assets/js/model-viewer-debug.js"></script>
 </head>
-
 <body>
-  <div data-include="/header-tr.html"></div>
-
-  <h1>Uluslararası Uzay İstasyonu</h1>
-
-  <div class="container">
-    <p>
-      Uluslararası Uzay İstasyonu, ortak bilimsel deneylerin yapıldığı yörüngesel bir uzay laboratuvarıdır.
+<div data-include="/header-ru.html"></div>
+<h1>Международная космическая станция</h1>
+<div class="container">
+<p>
+      Международная космическая станция — орбитальная космическая лаборатория, где проводятся совместные научные эксперименты.
     </p>
-
-    <model-viewer data-track="model_view" data-model-name="iss"
-      src="/assets/models/iss.glb"
-      camera-controls
-      ar
-      ar-modes="webxr scene-viewer quick-look">
-    </model-viewer>
-  </div>
-
-  <div data-include="/footer-tr.html"></div>
-
-
-
-    <!-- Model Viewer Fix Script - Direct initialization -->
-  <script>
+<model-viewer ar="" ar-modes="webxr scene-viewer quick-look" camera-controls="" data-model-name="iss" data-track="model_view" src="/assets/models/iss.glb">
+</model-viewer>
+</div>
+<div data-include="/footer-ru.html"></div>
+<!-- Model Viewer Fix Script - Direct initialization -->
+<script>
     (function() {
       console.log('[Model-Viewer Init] Checking model-viewer status...');
       

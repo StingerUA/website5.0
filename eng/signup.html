@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="tr">
+
+<html lang="en">
 <head>
-  <!-- Универсальный favicon-блок -->
-  <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/assets/icons/AlbaLogo.png" sizes="180x180">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#020617">
-  <meta name="msapplication-TileColor" content="#020617">
-  <meta name="msapplication-TileImage" content="/favicon.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kayıt Ol – Alba Space</title>
-  <link rel="stylesheet" href="/assets/css/site.css">
-  <link rel="stylesheet" href="/assets/css/fix-layout.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script src="/assets/js/include.js" defer></script>
-  <style>
+<!-- Универсальный favicon-блок -->
+<link href="/assets/icons/AlbaLogo.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/icons/AlbaLogo.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/icons/AlbaLogo.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/manifest.json" rel="manifest"/>
+<meta content="#020617" name="theme-color"/>
+<meta content="#020617" name="msapplication-TileColor"/>
+<meta content="/favicon.png" name="msapplication-TileImage"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Sign Up – Alba Space</title>
+<link href="/assets/css/site.css" rel="stylesheet"/>
+<link href="/assets/css/fix-layout.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<script defer="" src="/assets/js/include.js"></script>
+<style>
     :root {
       --page-bg: #020617;
       --accent: #00c2ff;
@@ -67,45 +68,37 @@
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
-  <div data-include="/header-tr.html"></div>
-
-  <main class="flex-grow flex items-center justify-center px-4 py-20">
-    <div class="glass-card w-full max-w-md p-8 rounded-3xl shadow-2xl">
-      <h1 class="text-3xl font-bold text-center mb-8 text-black">Kayıt Ol</h1>
-      
-      <form action="/profile.html" class="space-y-6">
-        <div>
-          <label class="block text-sm font-medium text-gray-400 mb-2">Kullanıcı Adı</label>
-          <input type="text" required class="input-field w-full px-4 py-3 rounded-xl" placeholder="Kullanıcı adınızı girin">
-        </div>
-        
-        <div>
-          <label class="block text-sm font-medium text-gray-400 mb-2">Şifre</label>
-          <input type="password" required class="input-field w-full px-4 py-3 rounded-xl" placeholder="••••••••">
-        </div>
-
-        <button type="submit" class="btn-primary w-full py-3 rounded-xl text-lg mt-6">
-          Onayla
+<div data-include="/header-en.html"></div>
+<main class="flex-grow flex items-center justify-center px-4 py-20">
+<div class="glass-card w-full max-w-md p-8 rounded-3xl shadow-2xl">
+<h1 class="text-3xl font-bold text-center mb-8 text-black">Sign Up</h1>
+<form action="/profile.html" class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-400 mb-2">Username</label>
+<input class="input-field w-full px-4 py-3 rounded-xl" placeholder="Enter your username" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-400 mb-2">Password</label>
+<input class="input-field w-full px-4 py-3 rounded-xl" placeholder="••••••••" required="" type="password"/>
+</div>
+<button class="btn-primary w-full py-3 rounded-xl text-lg mt-6" type="submit">
+          Sign Up
         </button>
-      </form>
-
-      <div class="flex items-center my-6">
-        <div class="flex-grow h-px bg-gray-700"></div>
-        <span class="px-4 text-gray-500 text-sm">veya</span>
-        <div class="flex-grow h-px bg-gray-700"></div>
-      </div>
-
-      <button class="btn-google w-full py-3 rounded-xl flex items-center justify-center gap-3 font-medium">
-        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-6 h-6">
-        Google ile Giriş Yap
+</form>
+<div class="flex items-center my-6">
+<div class="flex-grow h-px bg-gray-700"></div>
+<span class="px-4 text-gray-500 text-sm">or</span>
+<div class="flex-grow h-px bg-gray-700"></div>
+</div>
+<button class="btn-google w-full py-3 rounded-xl flex items-center justify-center gap-3 font-medium">
+<img alt="Google" class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg"/>
+        Sign in with Google
       </button>
-
-      <p class="text-center mt-6 text-gray-400 text-sm">
-        Zaten hesabınız var mı? <a href="#" class="text-[#00c2ff] hover:underline">Giriş Yap</a>
-      </p>
-    </div>
-  </main>
-
-  <div data-include="/footer-tr.html"></div>
+<p class="text-center mt-6 text-gray-400 text-sm">
+        Already have an account? <a class="text-[#00c2ff] hover:underline" href="#">Sign In</a>
+</p>
+</div>
+</main>
+<div data-include="/footer-en.html"></div>
 </body>
 </html>

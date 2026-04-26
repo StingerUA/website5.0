@@ -2,7 +2,6 @@
 <header class="site-header">
   <!-- Универсальный favicon-блок -->
   <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/icons/AlbaLogo.png" sizes="180x180">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#020617">
@@ -15,11 +14,11 @@
       <a href="#" class="ai-widget-toggle" aria-label="AI widget" title="AI">
         <img src="/assets/images/albamenai.png" alt="AI">
       </a>
-      <div class="alien-dropdown-container" style="position: relative; display: inline-block;">
+      <div class="alien-dropdown-container">
         <a href="#" class="alien-ghost" aria-label="Меню аккаунта" aria-controls="alienMenu" aria-expanded="false" aria-haspopup="true" title="Войти" onclick="toggleAlienMenu(event)">
           <img src="/assets/icons/alien.png" alt="LogIn">
         </a>
-        <div id="alienMenu" style="display: none; position: absolute; left: 0; top: 120%; background: rgba(2, 6, 23, 0.95); border: 1px solid rgba(0, 194, 255, 0.3); border-radius: 12px; padding: 12px; min-width: 140px; backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); z-index: 99999;">
+        <div id="alienMenu">
            <a href="#" class="alien-menu-item open-login">Войти</a>
            <button type="button" class="alien-menu-item alien-menu-google" onclick="login({ closeMenu: true, source: 'header-menu' })" aria-label="Войти через Google">Войти через Google</button>
            <a href="#" class="alien-menu-item open-signup">Регистрация</a>
@@ -41,6 +40,7 @@
         <a href="/rus/hizmetler.html" class="dropdown-trigger" aria-expanded="false">УСЛУГИ</a>
         <div class="dropdown-menu">
           <a href="/rus/hizmetler.html">УСЛУГИ</a>
+          <a href="/rus/basindabiz.html">ПРЕССА</a>
           <a href="https://albaspace.com.tr/hyperclub" target="_blank" rel="noopener" class="hyperclub-link">Hyper Club</a>
         </div>
       </div>
@@ -56,7 +56,6 @@
         <a href="/rus/hakkimizda.html" class="dropdown-trigger" aria-expanded="false">О НАС</a>
         <div class="dropdown-menu">
           <a href="/rus/hakkimizda.html">О НАС</a>
-          <a href="/rus/basindabiz.html">ПРЕССА</a>
           <a href="/rus/galeri.html">ГАЛЕРЕЯ</a>
           <a href="/rus/iletisim.html">КОНТАКТЫ</a>
         </div>

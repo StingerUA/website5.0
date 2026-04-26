@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="tr">
-  <head>
-  <!-- Универсальный favicon-блок -->
-  <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/assets/icons/AlbaLogo.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/assets/icons/AlbaLogo.png" sizes="180x180">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#020617">
-  <meta name="msapplication-TileColor" content="#020617">
-  <meta name="msapplication-TileImage" content="/favicon.png">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Albamen Uzay Keşfi</title>
 
-    <link rel="stylesheet" href="/assets/css/site.css" />
-  <link rel="stylesheet" href="/assets/css/fix-layout.css">
 
-    <style> * { box-sizing: border-box; } body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #ffffff; line-height: 1.6; overflow-x: hidden; } @media (min-width: 768px) { body { background-attachment: scroll !important; background-size: cover !important; } } h1,h2,h3,h4,h5,h6 { margin: 0; font-weight: 600; } p { margin: 0; } a { color: #8ab4f8; text-decoration: none; } .container { width: 90%; max-width: 1200px; margin: 0 auto; } /* ========================= GLOW CONTAINERS (NO TEXT GLOW) ========================= */ .glow-box{ border: 1px solid rgba(148, 163, 184, 0.28); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 18px; padding: 18px 18px; box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.12), 0 12px 40px rgba(0, 0, 0, 0.65), 0 0 28px rgba(56, 189, 248, 0.18); } .glow-box.glow-strong{ box-shadow: 0 0 0 1px rgba(244, 114, 182, 0.14), 0 18px 60px rgba(0, 0, 0, 0.72), 0 0 40px rgba(168, 85, 247, 0.22), 0 0 28px rgba(56, 189, 248, 0.18); } .glow-box.compact{ padding: 14px 14px; border-radius: 16px; } /* Slight container glow for existing cards (still NO text glow) */ .feature-card, .timeline-item-content, .planet-content, .value-card{ box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 24px rgba(56, 189, 248, 0.12); } /* ========================= HERO ========================= */
+<html lang="en">
+<head>
+<!-- Универсальный favicon-блок -->
+<link href="/assets/icons/AlbaLogo.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/icons/AlbaLogo.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/icons/AlbaLogo.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/manifest.json" rel="manifest"/>
+<meta content="#020617" name="theme-color"/>
+<meta content="#020617" name="msapplication-TileColor"/>
+<meta content="/favicon.png" name="msapplication-TileImage"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Albamen Space Exploration</title>
+<link href="/assets/css/site.css" rel="stylesheet"/>
+<link href="/assets/css/fix-layout.css" rel="stylesheet"/>
+<style> * { box-sizing: border-box; } body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #ffffff; line-height: 1.6; overflow-x: hidden; } @media (min-width: 768px) { body { background-attachment: scroll !important; background-size: cover !important; } } h1,h2,h3,h4,h5,h6 { margin: 0; font-weight: 600; } p { margin: 0; } a { color: #8ab4f8; text-decoration: none; } .container { width: 90%; max-width: 1200px; margin: 0 auto; } /* ========================= GLOW CONTAINERS (NO TEXT GLOW) ========================= */ .glow-box{ border: 1px solid rgba(148, 163, 184, 0.28); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 18px; padding: 18px 18px; box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.12), 0 12px 40px rgba(0, 0, 0, 0.65), 0 0 28px rgba(56, 189, 248, 0.18); } .glow-box.glow-strong{ box-shadow: 0 0 0 1px rgba(244, 114, 182, 0.14), 0 18px 60px rgba(0, 0, 0, 0.72), 0 0 40px rgba(168, 85, 247, 0.22), 0 0 28px rgba(56, 189, 248, 0.18); } .glow-box.compact{ padding: 14px 14px; border-radius: 16px; } /* Slight container glow for existing cards (still NO text glow) */ .feature-card, .timeline-item-content, .planet-content, .value-card{ box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 24px rgba(56, 189, 248, 0.12); } /* ========================= HERO ========================= */
 .hero {
   min-height: 80vh;
   padding: 160px 0 80px;
@@ -290,278 +290,245 @@
 
 .text-gradient-yellow { background: linear-gradient(to right, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 	</style>
-  </head>
-
-  <body>
-    <div data-include-html="/header-tr.html"></div>
-
-    <section class="hero">
-      <div class="hero-inner">
-        <!-- Removed glow-box per user design request -->
-        <h1 class="hero-title">
-          <span class="title-line-1">Hazırsan uzaydaş...</span>
-          <span class="title-line-2">Kemerini bağla.</span>
-        </h1>
-        <p class="hero-subtitle">Albamen ile evreni keşfet.</p>
-
-        <div class="hero-buttons">
-          <a href="https://albamen.space/#" class="btn btn-primary">
-            <!-- Rocket Icon -->
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-              <path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-2.3-.4 2 7 3.3z"/>
-            </svg>
-            Uzaya Başla
+</head>
+<body>
+<div data-include-html="/header-en.html"></div>
+<section class="hero">
+<div class="hero-inner">
+<!-- Removed glow-box per user design request -->
+<h1 class="hero-title">
+<span class="title-line-1">If you are ready, spacer...</span>
+<span class="title-line-2">Fasten your seat belt.</span>
+</h1>
+<p class="hero-subtitle">Explore the universe with Albamen.</p>
+<div class="hero-buttons">
+<a class="btn btn-primary" href="https://albamen.space/#">
+<!-- Rocket Icon -->
+<svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24">
+<path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-2.3-.4 2 7 3.3z"></path>
+</svg>
+            Go to Space
           </a>
-          
-          <a href="#book-section" class="btn btn-outline">
-            <!-- Book Icon -->
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-            </svg>
-            Albamen ve Lara Uzayda
+<a class="btn btn-outline" href="#book-section">
+<!-- Book Icon -->
+<svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24">
+<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+</svg>
+            Albamen and Lara in Space
           </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================= NEW BOOK SECTION (SCREENSHOT MATCH) ========================= -->
-    <section class="book-section container" id="book-section">
-      <div class="book-container-new">
-        
-        <!-- Left: Image with Astronaut -->
-        <div class="book-visual">
-          <div class="tag-pill outline badge-top">TÜRKİYE'NİN İLKİ</div>
-          <div class="glow-box book-glow">
-            <img src="/assets/images/albamenvelara.jpg" alt="Albamen Uzay Ansiklopedisi" class="book-img-main">
+</div>
+</div>
+</section>
+<!-- ========================= NEW BOOK SECTION (SCREENSHOT MATCH) ========================= -->
+<section class="book-section container" id="book-section">
+<div class="book-container-new">
+<!-- Left: Image with Astronaut -->
+<div class="book-visual">
+<div class="tag-pill outline badge-top">Türkiye's FIRST</div>
+<div class="glow-box book-glow">
+<img alt="Albamen Space Encyclopedia" class="book-img-main" src="/assets/images/albamenvelara.jpg"/>
+</div>
+</div>
+<!-- Right: Info     -->
+<div class="book-details">
+<div class="tag-pill outline book-tag">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" style="margin-right: 6px;" viewbox="0 0 24 24" width="14"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            BOOK UNIVERSE
           </div>
-        </div>
-
-        <!-- Right: Info     -->
-        <div class="book-details">
-          <div class="tag-pill outline book-tag">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-            KİTAP EVRENİ
-          </div>
-          
-          <h2 class="book-title-main">
-            Türkiye'nin İlk <br>
-            <span class="text-gradient-pink">Çocuk Uzay Ansiklopedisi</span>
-          </h2>
-          
-          <p class="book-desc-main">
-            Albamen ve Lara ile uzayın derinliklerine yolculuğa çık. Türk astronotların hikayeleri, Mars görevleri ve evrenin sırları bu kitapta seni bekliyor.
+<h2 class="book-title-main">
+            Türkiye's First <br/>
+<span class="text-gradient-pink">Children's Space Encyclopedia</span>
+</h2>
+<p class="book-desc-main">
+            Go on a journey into the depths of space with Albamen and Lara. Stories of Turkish astronauts, Mars missions and secrets of the universe are waiting for you in this book.
           </p>
-          
-          <div class="book-specs-grid">
-            <div class="spec-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-              125 sayfa renkli içerik
+<div class="book-specs-grid">
+<div class="spec-item">
+<svg fill="none" height="18" stroke="#a855f7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              125 pages of color content
             </div>
-            <div class="spec-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l9.242-1.586A2 2 0 0 0 21 15.757V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10.757a2 2 0 0 0 1.758 1.657L12 19z"></path></svg>
-              Sert kapak, premium baskı
+<div class="spec-item">
+<svg fill="none" height="18" stroke="#a855f7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 19l9.242-1.586A2 2 0 0 0 21 15.757V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10.757a2 2 0 0 0 1.758 1.657L12 19z"></path></svg>
+              Hard cover, premium printing
             </div>
-            <div class="spec-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"></path></svg>
-              Artırılmış gerçeklik deneyimi
+<div class="spec-item">
+<svg fill="none" height="18" stroke="#a855f7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"></path></svg>
+              Augmented reality experience
             </div>
-            <div class="spec-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="16" rx="2" ry="2"></rect><path d="M12 9v2m0 4v2"></path></svg>
-              QR kod ile etkileşim
+<div class="spec-item">
+<svg fill="none" height="18" stroke="#a855f7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><rect height="16" rx="2" ry="2" width="12" x="6" y="4"></rect><path d="M12 9v2m0 4v2"></path></svg>
+              Interaction with QR code
             </div>
-          </div>
-          
-          <div class="rating-row">
-            <div class="stars">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffff00"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffff00"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffff00"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffff00"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffff00"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
-            <span class="rating-text">5.0 (250+ değerlendirme)</span>
-          </div>
-          
-          <div class="book-actions-row">
-            <a href="/albamen-kitap.html" class="btn-incele">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              Kitabı İncele
+</div>
+<div class="rating-row">
+<div class="stars">
+<svg fill="#ffff00" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+<svg fill="#ffff00" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+<svg fill="#ffff00" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+<svg fill="#ffff00" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+<svg fill="#ffff00" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+</div>
+<span class="rating-text">5.0 (250+ reviews)</span>
+</div>
+<div class="book-actions-row">
+<a class="btn-incele" href="/albamen-kitap.html">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+              Review the Book
             </a>
-            <a href="https://iglooyayinevi.com/albamen-ve-lara-uzayda" class="btn-satin-al">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-              Satın Al
+<a class="btn-satin-al" href="https://iglooyayinevi.com/albamen-ve-lara-uzayda">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+              Buy
             </a>
-            <a href="https://albaspace.com.tr/atlas.html" class="ar-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-              AR Deneyimi
+<a class="ar-link" href="https://albaspace.com.tr/atlas.html">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" x2="12" y1="22.08" y2="12"></line></svg>
+              AR Experience
             </a>
-          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================= TIMELINE SECTION ========================= -->
+<section class="timeline-section container">
+<div class="section-header-center">
+<div class="tag-pill outline">
+<svg fill="currentColor" height="16" style="margin-right:6px" viewbox="0 0 24 24" width="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z\"></path><circle cx="12" cy="9" r="1.5"></circle><path d="M12 14c-2.33 0-4.31 1.46-5.11 3.5h10.22c-.8-2.04-2.78-3.5-5.11-3.5z\"></path></svg>
+          TURKISH SPACE MISSIONS
         </div>
-      </div>
-    </section>
-    
-    <!-- ========================= TIMELINE SECTION ========================= -->
-    <section class="timeline-section container">
-      <div class="section-header-center">
-        <div class="tag-pill outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z\"/><circle cx="12" cy="9" r="1.5"/><path d="M12 14c-2.33 0-4.31 1.46-5.11 3.5h10.22c-.8-2.04-2.78-3.5-5.11-3.5z\"/></svg>
-          TÜRK UZAY GÖREVLERİ
+<h2><span class="text-gradient-yellow">To the stars</span> <span class="text-gradient-pink">The Extending Journey</span></h2>
+<p>Discover Türkiye's space adventure. From our first astronauts to the goals of the future...</p>
+</div>
+<div class="timeline">
+<div class="timeline-line-gradient"></div>
+<!-- Item 1: Alper -->
+<div class="timeline-item">
+<div class="timeline-icon-circle bg-gradient-pink">
+<svg fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"></path></svg>
+</div>
+<div class="timeline-item-content timeline-card">
+<span class="year">2024</span>
+<h3>Alper Gezeravcı</h3>
+<span class="role text-gradient-pink">Türkiye's First Astronaut</span>
+<p>He conducted 13 scientific experiments on the International Space Station.</p>
+</div>
+</div>
+<!-- Item 2: Tuva -->
+<div class="timeline-item">
+<div class="timeline-icon-circle bg-gradient-blue">
+<svg viewbox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+</div>
+<div class="timeline-item-content timeline-card">
+<span class="year">2024</span>
+<h3>Tuva Cihangir Atasever</h3>
+<span class="role text-gradient-blue">Türkiye's Second Astronaut</span>
+<p>He is the second Turkish astronaut to conduct scientific research and experiments in space.</p>
+</div>
+</div>
+<!-- Item 3: Deneyler -->
+<div class="timeline-item">
+<div class="timeline-icon-circle bg-gradient-pink">
+<svg fill="currentColor" viewbox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2V17zm4 0h-2V7h2V17zm4 0h-2v-4h2V17z"></path></svg>
+</div>
+<div class="timeline-item-content timeline-card">
+<span class="year text-gradient-pink" style="color:inherit">CONTINUE</span>
+<h3>Space Experiments</h3>
+<span class="role text-gradient-purple">Scientific Research</span>
+<p>Experiments designed by Turkish scientists in microgravity environment.</p>
+</div>
+</div>
+<!-- Item 4: Vizyon -->
+<div class="timeline-item">
+<div class="timeline-icon-circle bg-gradient-blue">
+<svg viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path></svg>
+</div>
+<div class="timeline-item-content timeline-card">
+<span class="year text-gradient-blue" style="color:inherit">FUTURE</span>
+<h3>Turkey's Space Vision</h3>
+<span class="role text-gradient-blue">2030 Goals</span>
+<p>Goals extending to the Moon and beyond with the national space program.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================= PLANET SECTION ========================= -->
+<section class="planet-section container">
+<div class="section-header-center">
+<div class="tag-pill orange">
+<svg fill="currentColor" height="16" style="margin-right:6px" viewbox="0 0 24 24" width="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+           DISCOVERY AREA
         </div>
-        <h2><span class="text-gradient-yellow">Yıldızlara</span> <span class="text-gradient-pink">Uzanan Yolculuk</span></h2>
-        <p>Türkiye'nin uzay macerasını keşfet. İlk astronotlarımızdan geleceğin hedeflerine...</p>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-line-gradient"></div>
-
-        <!-- Item 1: Alper -->
-        <div class="timeline-item">
-          <div class="timeline-icon-circle bg-gradient-pink">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/></svg>
-          </div>
-          <div class="timeline-item-content timeline-card">
-            <span class="year">2024</span>
-            <h3>Alper Gezeravcı</h3>
-            <span class="role text-gradient-pink">Türkiye'nin İlk Astronotu</span>
-            <p>Uluslararası Uzay İstasyonu'nda 13 bilimsel deney gerçekleştirdi.</p>
-          </div>
-        </div>
-
-        <!-- Item 2: Tuva -->
-        <div class="timeline-item">
-          <div class="timeline-icon-circle bg-gradient-blue">
-            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <div class="timeline-item-content timeline-card">
-            <span class="year">2024</span>
-            <h3>Tuva Cihangir Atasever</h3>
-            <span class="role text-gradient-blue">Türkiye'nin İkinci Astronotu</span>
-            <p>Uzayda bilimsel araştırmalar ve deneyler yapan ikinci Türk astronot.</p>
-          </div>
-        </div>
-
-        <!-- Item 3: Deneyler -->
-        <div class="timeline-item">
-          <div class="timeline-icon-circle bg-gradient-pink">
-             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2V17zm4 0h-2V7h2V17zm4 0h-2v-4h2V17z"/></svg>
-          </div>
-          <div class="timeline-item-content timeline-card">
-            <span class="year text-gradient-pink" style="color:inherit">DEVAM</span>
-            <h3>Uzay Deneyleri</h3>
-            <span class="role text-gradient-purple">Bilimsel Araştırmalar</span>
-            <p>Mikro yerçekimi ortamında Türk bilim insanlarının tasarladığı deneyler.</p>
-          </div>
-        </div>
-
-        <!-- Item 4: Vizyon -->
-        <div class="timeline-item">
-          <div class="timeline-icon-circle bg-gradient-blue">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-          </div>
-          <div class="timeline-item-content timeline-card">
-            <span class="year text-gradient-blue" style="color:inherit">GELECEK</span>
-            <h3>Türkiye’nin Uzay Vizyonu</h3>
-            <span class="role text-gradient-blue">2030 Hedefleri</span>
-            <p>Milli uzay programı ile Ay'a ve ötesine uzanan hedefler.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================= PLANET SECTION ========================= -->
-    <section class="planet-section container">
-      <div class="section-header-center">
-        <div class="tag-pill orange">
-           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-           KEŞİF ALANI
-        </div>
-        <h2 style="color: #00c2ff; background: none; -webkit-text-fill-color: #00c2ff;">Gezegeni Seç</h2>
-        <p>Güneş sistemindeki gezegenleri keşfet ve hepsinin hikayesini öğren.</p>
-      </div>
-
-      <div class="space-system-row">
-        <!-- Sun -->
-        <div class="celestial-body sun active" data-id="sun" style="--body-color: #ff4500; --glow-color: rgba(255, 69, 0, 0.6);" role="button">
-          <span class="label">Güneş</span>
-        </div>
-        <!-- Planets -->
-        <div class="celestial-body planet" data-id="mercury" style="--body-size: 35px; --body-color: #97979f; --glow-color: rgba(151, 151, 159, 0.4);" role="button"><span class="label">Merkür</span></div>
-        <div class="celestial-body planet" data-id="venus" style="--body-size: 45px; --body-color: #e3bb76; --glow-color: rgba(227, 187, 118, 0.4);" role="button"><span class="label">Venüs</span></div>
-        <div class="celestial-body planet" data-id="earth" style="--body-size: 48px; --body-color: #2271b3; --glow-color: rgba(34, 113, 179, 0.5);" role="button"><span class="label">Dünya</span></div>
-        <div class="celestial-body planet" data-id="mars" style="--body-size: 40px; --body-color: #e27b58; --glow-color: rgba(226, 123, 88, 0.4);" role="button"><span class="label">Mars</span></div>
-        <div class="celestial-body planet" data-id="jupiter" style="--body-size: 75px; --body-color: #d39c7e; --glow-color: rgba(211, 156, 126, 0.3);" role="button"><span class="label">Jüpiter</span></div>
-        <div class="celestial-body planet" data-id="saturn" style="--body-size: 65px; --body-color: #c5ab6e; --glow-color: rgba(197, 171, 110, 0.3);" role="button"><span class="label">Satürn</span></div>
-        <div class="celestial-body planet" data-id="uranus" style="--body-size: 55px; --body-color: #b5e3e3; --glow-color: rgba(181, 227, 227, 0.4);" role="button"><span class="label">Uranüs</span></div>
-        <div class="celestial-body planet" data-id="neptune" style="--body-size: 53px; --body-color: #4b70dd; --glow-color: rgba(75, 112, 221, 0.4);" role="button"><span class="label">Neptün</span></div>
-      </div>
-
-      <div class="planet-content-wrapper" id="planetDetailBox">
-        <div class="glow-box glow-strong">
-          <h3 id="planetTitle">Güneş</h3>
-          <p id="planetDesc">Güneş sisteminin merkezinde yer alan, devasa bir plazma küresidir. Tüm yaşamın enerji kaynağıdır.</p>
-          <button class="btn audio-btn" id="playAudioBtn" style="background: #1e3a8a; color: white;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px; vertical-align: middle;">
-              <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-            </svg>
-            Sesli Dinle
+<h2 style="color: #00c2ff; background: none; -webkit-text-fill-color: #00c2ff;">Select Planet</h2>
+<p>Explore the planets in the solar system and learn their stories.</p>
+</div>
+<div class="space-system-row">
+<!-- Sun -->
+<div class="celestial-body sun active" data-id="sun" role="button" style="--body-color: #ff4500; --glow-color: rgba(255, 69, 0, 0.6);">
+<span class="label">Sun</span>
+</div>
+<!-- Planets -->
+<div class="celestial-body planet" data-id="mercury" role="button" style="--body-size: 35px; --body-color: #97979f; --glow-color: rgba(151, 151, 159, 0.4);"><span class="label">Mercury</span></div>
+<div class="celestial-body planet" data-id="venus" role="button" style="--body-size: 45px; --body-color: #e3bb76; --glow-color: rgba(227, 187, 118, 0.4);"><span class="label">Venus</span></div>
+<div class="celestial-body planet" data-id="earth" role="button" style="--body-size: 48px; --body-color: #2271b3; --glow-color: rgba(34, 113, 179, 0.5);"><span class="label">The world</span></div>
+<div class="celestial-body planet" data-id="mars" role="button" style="--body-size: 40px; --body-color: #e27b58; --glow-color: rgba(226, 123, 88, 0.4);"><span class="label">Mars</span></div>
+<div class="celestial-body planet" data-id="jupiter" role="button" style="--body-size: 75px; --body-color: #d39c7e; --glow-color: rgba(211, 156, 126, 0.3);"><span class="label">Jupiter</span></div>
+<div class="celestial-body planet" data-id="saturn" role="button" style="--body-size: 65px; --body-color: #c5ab6e; --glow-color: rgba(197, 171, 110, 0.3);"><span class="label">Saturn</span></div>
+<div class="celestial-body planet" data-id="uranus" role="button" style="--body-size: 55px; --body-color: #b5e3e3; --glow-color: rgba(181, 227, 227, 0.4);"><span class="label">Uranus</span></div>
+<div class="celestial-body planet" data-id="neptune" role="button" style="--body-size: 53px; --body-color: #4b70dd; --glow-color: rgba(75, 112, 221, 0.4);"><span class="label">Neptune</span></div>
+</div>
+<div class="planet-content-wrapper" id="planetDetailBox">
+<div class="glow-box glow-strong">
+<h3 id="planetTitle">Sun</h3>
+<p id="planetDesc">It is a huge sphere of plasma located at the center of the solar system. It is the energy source of all life.</p>
+<button class="btn audio-btn" id="playAudioBtn" style="background: #1e3a8a; color: white;">
+<svg fill="currentColor" height="20" style="margin-right: 8px; vertical-align: middle;" viewbox="0 0 24 24" width="20">
+<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path>
+</svg>
+            Listen Aloud
           </button>
+</div>
+</div>
+</section>
+<!-- ========================= QUOTE & VALUES SECTION ========================= -->
+<section class="quote-section container">
+<div class="quote-icon">
+<svg fill="currentColor" viewbox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-4.5-5-7-5C3 1 0 5.75 0 9c0 4.5 3 7 3 8s-3 2-3 2h4zm8 0c3 0 7-1 7-8V5c0-1.25-4.5-5-7-5s-7 3.75-7 7c0 4.5 3 7 3 8s-3 2-3 2h4z"></path></svg>
+</div>
+<div style="max-width: 900px; margin: 0 auto 60px;">
+<div class="quote-text">"The future will come to those who wonder <span class="text-gradient-pink">"It is established with children."</span></div>
+<div class="quote-author">
+<strong>— İdris Albayrak</strong>
+          Founder of Albamen AI
         </div>
-      </div>
-    </section>
-
-    <!-- ========================= QUOTE & VALUES SECTION ========================= -->
-    <section class="quote-section container">
-      <div class="quote-icon">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-4.5-5-7-5C3 1 0 5.75 0 9c0 4.5 3 7 3 8s-3 2-3 2h4zm8 0c3 0 7-1 7-8V5c0-1.25-4.5-5-7-5s-7 3.75-7 7c0 4.5 3 7 3 8s-3 2-3 2h4z"/></svg>
-      </div>
-      
-      <div style="max-width: 900px; margin: 0 auto 60px;">
-        <div class="quote-text">"Gelecek, merak eden <span class="text-gradient-pink">çocuklarla kurulur."</span></div>
-        <div class="quote-author">
-          <strong>— İdris Albayrak</strong>
-          Albamen AI Kurucusu
-        </div>
-      </div>
-
-      <div class="values">
-        <!-- Value 1 -->
-        <div class="value-box">
-          <div class="value-icon-box bg-purple-soft">
-             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-          </div>
-          <h3>STEM Odaklı</h3>
-          <p>Bilim, teknoloji, mühendislik ve matematiğin gücüyle donatılmış nesiller.</p>
-        </div>
-
-        <!-- Value 2 -->
-        <div class="value-box">
-           <div class="value-icon-box bg-blue-soft">
-             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-13c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/></svg>
-           </div>
-           <h3>Otodidakt</h3>
-           <p>Kendi kendine öğrenebilen, meraklı ve araştırmacı bireyler yetiştirmek.</p>
-        </div>
-
-        <!-- Value 3 -->
-        <div class="value-box">
-           <div class="value-icon-box bg-pink-soft">
-             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-           </div>
-           <h3>Hayal Gücü</h3>
-           <p>Bilim ve hayal gücünü birleştirerek sınırları aşan projeler üretmek.</p>
-        </div>
-      </div>
-    </section>
-
-
-
-
-
-    <div data-include-html="/footer-tr.html"></div>
-
-    <script src="/assets/js/include.js"></script>
-
-    <script>
+</div>
+<div class="values">
+<!-- Value 1 -->
+<div class="value-box">
+<div class="value-icon-box bg-purple-soft">
+<svg fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
+</div>
+<h3>STEM Focused</h3>
+<p>Generations equipped with the power of science, technology, engineering and mathematics.</p>
+</div>
+<!-- Value 2 -->
+<div class="value-box">
+<div class="value-icon-box bg-blue-soft">
+<svg fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-13c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"></path></svg>
+</div>
+<h3>Otodidact</h3>
+<p>To raise individuals who can learn on their own, are curious and inquisitive.</p>
+</div>
+<!-- Value 3 -->
+<div class="value-box">
+<div class="value-icon-box bg-pink-soft">
+<svg fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+</div>
+<h3>Imagination</h3>
+<p>To produce projects that transcend boundaries by combining science and imagination.</p>
+</div>
+</div>
+</section>
+<div data-include-html="/footer-en.html"></div>
+<script src="/assets/js/include.js"></script>
+<script>
       // ===========================
       // 1. PLANET INTERACTION LOGIC
       // ===========================
@@ -662,8 +629,7 @@
         });
       });
     </script>
-
-  <script>
+<script>
     const revealItems = document.querySelectorAll('.reveal');
 
     const observer = new IntersectionObserver((entries, obs) => {
@@ -684,8 +650,7 @@
       observer.observe(item);
     });
   </script>
-
-  <script>
+<script>
       // Sayfa Yüklendiğinde Popup Kontrolü
       document.addEventListener("DOMContentLoaded", function() {
           // localStorage kontrolü: Kullanıcı daha önce "kabul ettim" dedi mi?
