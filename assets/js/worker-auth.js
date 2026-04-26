@@ -102,7 +102,8 @@ function closeAuthUi(options = {}) {
     const trigger = document.querySelector(".alien-ghost");
 
     if (menu) {
-      menu.style.display = "none";
+      menu.setAttribute("hidden", "");
+      menu.style.display = "";
     }
     if (trigger) {
       trigger.setAttribute("aria-expanded", "false");

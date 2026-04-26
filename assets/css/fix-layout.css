@@ -641,8 +641,8 @@
 .header-cart-icon {
     position: relative !important;
     display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    align-items: center;
+    justify-content: center;
     overflow: visible !important;
 }
 
@@ -650,65 +650,106 @@
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
-    transform: translate(-50%, -50%) !important;
+    transform: translate(-2px, -3px) !important;
     background-color: #00c2ff !important;
-    color: #ffffff !important;
-    width: 18px !important;
-    height: 18px !important;
+    color: white !important;
+    width: 16px !important;
+    height: 16px !important;
     border-radius: 50% !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     font-size: 10px !important;
-    font-weight: 700 !important;
+    font-weight: bold !important;
     line-height: 1 !important;
+    transform: none !important;
     z-index: 10 !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.25) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* ===== ALIEN DROPDOWN STYLES ===== */
+/* ===== ALIEN MENU CENTERING (NEW) ===== */
 .alien-dropdown-container {
     position: relative !important;
-    display: inline-block !important;
-    z-index: 9999 !important;
+}
+
+.alien-ghost {
+    display: inline-flex !important;
+    transition: transform 0.25s ease, filter 0.25s ease !important;
+    will-change: transform;
+}
+
+.alien-ghost:hover,
+.alien-ghost:focus-visible {
+    transform: scale(1.1) !important;
 }
 
 #alienMenu {
-    display: none !important;
     position: absolute !important;
-    left: 0 !important;
-    top: 120% !important;
-    min-width: 180px !important;
-    background: rgba(2, 6, 23, 0.95) !important;
-    border: 1px solid rgba(0, 194, 255, 0.3) !important;
-    border-radius: 12px !important;
+    top: calc(100% + 8px) !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 100000 !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32), 0 0 24px rgba(0, 191, 255, 0.14) !important;
+    min-width: 320px !important;
+    max-width: 480px !important;
+    background: rgba(2, 6, 23, 0.96) !important;
     padding: 12px !important;
-    backdrop-filter: blur(10px) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
-    z-index: 10000 !important;
-    width: max-content !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(0, 191, 255, 0.22) !important;
+    display: none !important;
+    gap: 10px;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+}
+
+#alienMenu:not([hidden]) {
+    display: flex !important;
 }
 
 #alienMenu .alien-menu-item {
-    display: block !important;
-    width: 100% !important;
-    padding: 10px 12px !important;
-    background-color: transparent !important;
-    color: #e5e7eb !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 110px !important;
+    padding: 12px 14px !important;
+    background-color: rgba(0, 191, 255, 0.18) !important;
+    color: #ffffff !important;
     text-decoration: none !important;
-    border-radius: 8px !important;
+    border-radius: 999px !important;
     font-weight: 600 !important;
-    font-size: 14px !important;
-    text-align: left !important;
-    transition: background-color 0.2s ease !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
+    font-size: 13px !important;
+    letter-spacing: 0.02em !important;
+    transition: transform 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16) !important;
+    text-align: center !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
     margin: 0 !important;
+    white-space: nowrap !important;
 }
 
 #alienMenu .alien-menu-item:hover,
-#alienMenu .alien-menu-item:focus {
-    background-color: rgba(0, 194, 255, 0.12) !important;
+#alienMenu .alien-menu-item:focus-visible {
+    background-color: rgba(0, 191, 255, 0.32) !important;
+    box-shadow: 0 10px 20px rgba(0, 191, 255, 0.18) !important;
+    transform: translateY(-1px) scale(1.02) !important;
     outline: none !important;
+}
+
+#alienMenu .worker-auth-user {
+    min-width: 100px !important;
+    padding: 10px 14px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 999px !important;
+    color: #dbeafe !important;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    text-align: center !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+#alienMenu .worker-auth-user:empty {
+    display: none !important;
 }
 
 /* Ensure social icons and langs are always flex row as requested */
@@ -757,11 +798,6 @@
         left: 15px !important;
         margin: 0 !important;
         z-index: 10005 !important; /* Higher than menu toggle or logo */
-    }
-
-    /* Hide social network icons in the mobile header to prevent overflow */
-    .header-social .social-row {
-        display: none !important;
     }
 
     /* Shift the logo/left icons to make space for the cart */
