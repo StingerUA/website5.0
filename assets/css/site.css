@@ -292,9 +292,12 @@ select, select option {
   box-shadow: 0 4px 12px rgba(0, 194, 255, 0.15);
 
   position: relative;
-  z-index: 4000;
+
+  z-index: 50;
+
   isolation: isolate;
-  overflow: visible;
+
+  overflow: visible !important; /* Ensure dropdowns aren't clipped */
 
 }
 
@@ -314,9 +317,11 @@ select, select option {
 
   flex-wrap:wrap;
 
-  position: relative;
-  z-index: 4000;
-  overflow: visible;
+  position:relative;
+
+  z-index: 50 !important; /* Maintain high z-index context */
+
+  overflow: visible !important; /* Ensure dropdowns aren't clipped */
 
 }
 
@@ -2127,6 +2132,7 @@ select, select option {
 /* ===== ALIEN DROPDOWN FIX ===== */
 .alien-dropdown-container {
     position: relative !important;
+    display: inline-block !important;
     z-index: 9999 !important;
 }
 
@@ -2340,3 +2346,6 @@ main:not(.home-main),
     margin-top: 90px !important; /* Minimal mobile spacing for home page */
   }
 }
+
+
+
