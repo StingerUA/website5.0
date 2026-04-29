@@ -35,7 +35,7 @@ runAfterDomReady(() => {
       }
       if (primary) {
         if (primary.getAttribute('href') === '/favicon.png') {
-          primary.setAttribute('href', '/assets/images/albalogo.png');
+          primary.setAttribute('href', '/assets/icons/AlbaLogo.png');
         }
         return;
       }
