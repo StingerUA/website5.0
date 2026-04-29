@@ -171,7 +171,7 @@
     left: 50% !important;
     right: auto !important;
     transform: translateX(-50%) !important;
-    top: calc(100% + 10%) !important;
+    top: 100% !important;
     min-width: auto !important;
     width: auto !important;
     display: flex !important;
@@ -194,11 +194,13 @@
 
   .main-nav .dropdown > .dropdown-trigger[href$="albamen.html"] + .dropdown-menu a,
   .main-nav .dropdown > .dropdown-trigger[href$="albamen.html"] + .dropdown-menu button {
-    width: auto !important;
+    width: auto;
     white-space: nowrap;
     display: inline-flex;
-    padding: 10px 14px;
+    padding: 8px 12px;
+    font-size: 13px;
     pointer-events: auto !important;
+    z-index: 10050 !important;
   }
 
   /* Ensure header dropdown items are clickable */
@@ -443,5 +445,48 @@
   .dropdown.active .dropdown-menu,
   .dropdown.active .dropdown-menu * {
     pointer-events: auto !important;
+  }
+}
+
+/* ============================================================
+   WHITE DROPDOWN FIX — product/shop/cart pages (product-text-black)
+   Must be at end of file to win specificity over all !important above
+   ============================================================ */
+html.product-text-black .dropdown-menu {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+html.product-text-black .dropdown-menu a,
+html.product-text-black .dropdown-menu button,
+html.product-text-black .dropdown-menu [role="menuitem"] {
+  color: #111827 !important;
+  pointer-events: auto !important;
+}
+
+html.product-text-black .dropdown-menu a:hover,
+html.product-text-black .dropdown-menu button:hover {
+  background-color: #f3f4f6 !important;
+  color: #111827 !important;
+}
+
+@media (max-width: 1023px) {
+  html.product-text-black .dropdown-menu {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  html.product-text-black .dropdown-menu a,
+  html.product-text-black .dropdown-menu button {
+    color: #111827 !important;
+    pointer-events: auto !important;
+  }
+
+  html.product-text-black .dropdown-menu a:hover,
+  html.product-text-black .dropdown-menu button:hover {
+    background-color: #f3f4f6 !important;
+    color: #111827 !important;
   }
 }
